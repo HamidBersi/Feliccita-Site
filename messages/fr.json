@@ -1,0 +1,22 @@
+{
+  "Metadata": {
+    "title": "La Félicità — Restaurant Italien",
+    "description": "Pizzas maison, antipasti et spécialités du jour — sur place, en terrasse ou à emporter."
+  },
+  "Navbar": {
+    "logoAlt": "Logo La Félicità",
+    "tagline": "Restaurant Italien",
+    "nav": {
+      "home": "Accueil",
+      "about": "À propos",
+      "reviews": "Avis",
+      "contact": "Contact"
+    },
+    "cta": "Menu & Commander",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu",
+    "mainNav": "Navigation principale",
+    "mobileNav": "Navigation mobile",
+    "language": "Langue"
+  }
+}

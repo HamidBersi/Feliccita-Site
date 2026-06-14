@@ -1,0 +1,22 @@
+{
+  "Metadata": {
+    "title": "La Félicità — Italienisches Restaurant",
+    "description": "Hausgemachte Pizzen, Antipasti und Tagesgerichte — vor Ort, auf der Terrasse oder zum Mitnehmen."
+  },
+  "Navbar": {
+    "logoAlt": "La Félicità Logo",
+    "tagline": "Italienisches Restaurant",
+    "nav": {
+      "home": "Startseite",
+      "about": "Über uns",
+      "reviews": "Bewertungen",
+      "contact": "Kontakt"
+    },
+    "cta": "Menü & Bestellen",
+    "openMenu": "Menü öffnen",
+    "closeMenu": "Menü schließen",
+    "mainNav": "Hauptnavigation",
+    "mobileNav": "Mobile Navigation",
+    "language": "Sprache"
+  }
+}

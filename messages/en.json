@@ -1,0 +1,22 @@
+{
+  "Metadata": {
+    "title": "La Félicità — Italian Restaurant",
+    "description": "Homemade pizzas, antipasti and daily specials — dine in, on the terrace or takeaway."
+  },
+  "Navbar": {
+    "logoAlt": "La Félicità logo",
+    "tagline": "Italian Restaurant",
+    "nav": {
+      "home": "Home",
+      "about": "About",
+      "reviews": "Reviews",
+      "contact": "Contact"
+    },
+    "cta": "Menu & Order",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "mainNav": "Main navigation",
+    "mobileNav": "Mobile navigation",
+    "language": "Language"
+  }
+}
