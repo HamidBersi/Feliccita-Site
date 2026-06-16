@@ -30,3 +30,23 @@
     @apply text-inherit no-underline;
   }
 }
+
+/* ══════════════════════════════════════
+   HERO — animation texte au chargement
+══════════════════════════════════════ */
+@keyframes hero-fade-up {
+  0% {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@utility hero-fade-up {
+  animation: hero-fade-up 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  opacity: 0;
+}

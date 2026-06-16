@@ -1,3 +1,4 @@
+import Hero from "@/components/Hero";
 import Navbar from "@/components/Navbar";
 import { setRequestLocale } from "next-intl/server";
 
@@ -10,9 +11,11 @@ export default async function Home({ params }: Props) {
   setRequestLocale(locale);
 
   return (
-    <>
+    <div className="lg:flex lg:h-screen lg:flex-col lg:overflow-hidden">
       <Navbar />
-      {/* Les autres sections arrivent étape par étape */}
-    </>
+      <div className="lg:min-h-0 lg:flex-1">
+        <Hero />
+      </div>
+    </div>
   );
 }

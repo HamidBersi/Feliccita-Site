@@ -17,6 +17,42 @@
     "closeMenu": "Fermer le menu",
     "mainNav": "Navigation principale",
     "mobileNav": "Navigation mobile",
-    "language": "Langue"
+    "drawerTitle": "Menu",
+    "language": "Langue",
+    "selectLanguage": "Choisir la langue",
+    "languages": {
+      "fr": "Français",
+      "en": "English",
+      "de": "Deutsch"
+    }
+  },
+  "Hero": {
+    "title": "Restaurant italien & pizzeria",
+    "titleLocation": "Furdenheim",
+    "subtitle": "Pizzas artisanales, pâtes fraîches et spécialités italiennes à déguster sur place, en terrasse ou à emporter.",
+    "order": "Commander en ligne",
+    "reserve": "Réserver une table",
+    "imageAlt": "Intérieur du restaurant La Félicità"
+  },
+  "InfoStrip": {
+    "rating": {
+      "title": "{rating}/5 sur Google"
+    },
+    "location": {
+      "title": "Furdenheim",
+      "subtitle": "15 rue du Stade, 67117 Furdenheim"
+    },
+    "phone": {
+      "title": "03 88 XX XX XX",
+      "subtitle": "Appelez-nous pour réserver ou commander"
+    },
+    "hours": {
+      "title": "Ouvert aujourd'hui",
+      "subtitle": "11h30 – 14h00 / 18h30 – 22h30"
+    },
+    "takeaway": {
+      "title": "À emporter",
+      "subtitle": "Commandez en ligne ou par téléphone"
+    }
   }
 }

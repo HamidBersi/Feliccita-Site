@@ -26,6 +26,42 @@ function LogoIcon({ alt }: { alt: string }) {
   );
 }
 
+function MenuIcon({ open }: { open: boolean }) {
+  return (
+    <span className="relative flex h-5 w-6 flex-col justify-center" aria-hidden="true">
+      <span
+        className={`block h-0.5 w-6 rounded-full bg-ink transition-all duration-300 ${
+          open ? "translate-y-[3px] rotate-45" : ""
+        }`}
+      />
+      <span
+        className={`mt-1.5 block h-0.5 w-6 rounded-full bg-ink transition-all duration-300 ${
+          open ? "opacity-0" : ""
+        }`}
+      />
+      <span
+        className={`mt-1.5 block h-0.5 w-6 rounded-full bg-ink transition-all duration-300 ${
+          open ? "-translate-y-[10px] -rotate-45" : ""
+        }`}
+      />
+    </span>
+  );
+}
+
+function ChevronRight() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M9 6l6 6-6 6"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export default function Navbar() {
   const t = useTranslations("Navbar");
   const pathname = usePathname();
@@ -41,28 +77,32 @@ export default function Navbar() {
     document.body.style.overflow = "";
   }
 
+  function toggleDrawer() {
+    if (isOpen) closeDrawer();
+    else openDrawer();
+  }
+
   function isActive(href: string) {
     return href === "/" ? pathname === "/" : false;
   }
 
   return (
     <>
-      {/* ══ NAVBAR ══ */}
-      <header className="sticky top-0 z-[100] flex h-[68px] items-center justify-between border-b border-border bg-white px-5 md:px-10">
-        <Link href="/" className="flex items-center gap-2.5">
+      <header className="sticky top-0 z-[100] flex h-[68px] items-center justify-between gap-4 border-b border-border bg-white px-5 md:px-8 lg:px-10">
+        <Link href="/" className="flex min-w-0 shrink-0 items-center gap-2.5" onClick={closeDrawer}>
           <LogoIcon alt={t("logoAlt")} />
-          <div className="flex flex-col">
-            <span className="font-serif text-lg leading-tight text-ink">
+          <div className="flex min-w-0 flex-col">
+            <span className="truncate font-serif text-[20px] leading-tight text-ink">
               La Félicità
             </span>
-            <span className="text-[9px] font-medium uppercase tracking-[0.18em] text-muted">
+            <span className="truncate text-[11px] font-medium uppercase tracking-[0.18em] text-muted">
               {t("tagline")}
             </span>
           </div>
         </Link>
 
         <nav
-          className="hidden items-center gap-7 md:flex"
+          className="hidden shrink-0 items-center gap-5 whitespace-nowrap lg:flex xl:gap-7"
           aria-label={t("mainNav")}
         >
           {NAV_ITEMS.map((item) => {
@@ -84,7 +124,7 @@ export default function Navbar() {
           })}
         </nav>
 
-        <div className="hidden items-center gap-3 md:flex">
+        <div className="hidden shrink-0 items-center gap-3 lg:flex">
           <LanguageSwitcher />
           <Link
             href="#"
@@ -96,56 +136,92 @@ export default function Navbar() {
 
         <button
           type="button"
-          className="cursor-pointer border-none bg-transparent p-2 text-2xl leading-none text-ink md:hidden"
-          aria-label={t("openMenu")}
+          className="flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-lg border border-border bg-white transition-colors hover:border-gold/40 lg:hidden"
+          aria-label={isOpen ? t("closeMenu") : t("openMenu")}
           aria-expanded={isOpen}
-          onClick={openDrawer}
+          onClick={toggleDrawer}
         >
-          ☰
+          <MenuIcon open={isOpen} />
         </button>
       </header>
 
-      {/* Overlay mobile */}
       <div
-        className={`fixed inset-0 z-[150] bg-black/40 transition-opacity duration-300 ${
+        className={`fixed inset-0 z-[150] bg-ink/40 backdrop-blur-[2px] transition-all duration-300 lg:hidden ${
           isOpen ? "visible opacity-100" : "invisible opacity-0"
         }`}
         onClick={closeDrawer}
         aria-hidden="true"
       />
 
-      {/* Drawer mobile */}
       <aside
-        className={`fixed right-0 top-0 z-[200] h-screen w-[280px] bg-white px-8 pb-8 pt-20 shadow-xl transition-transform duration-300 ${
+        className={`fixed right-0 top-0 z-[200] flex h-dvh w-[min(100vw-2.5rem,320px)] flex-col bg-white shadow-[-8px_0_40px_rgba(0,0,0,0.12)] transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] lg:hidden ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
         aria-hidden={!isOpen}
       >
-        <button
-          type="button"
-          className="absolute right-5 top-5 cursor-pointer border-none bg-transparent text-[28px] leading-none text-muted"
-          aria-label={t("closeMenu")}
-          onClick={closeDrawer}
-        >
-          &times;
-        </button>
-
-        <div className="mb-8">
-          <LanguageSwitcher />
-        </div>
-
-        <nav className="flex flex-col gap-6" aria-label={t("mobileNav")}>
-          {NAV_ITEMS.map((item) => (
-            <Link
-              key={item.key}
-              href={item.href}
-              className="text-base text-ink transition-colors hover:text-gold"
+        <div className="border-b border-border bg-cream/50 px-6 py-5">
+          <div className="flex items-center justify-between">
+            <span className="font-serif text-xl text-ink">{t("drawerTitle")}</span>
+            <button
+              type="button"
+              className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-gold-bg text-ink transition-colors hover:bg-gold hover:text-white"
+              aria-label={t("closeMenu")}
               onClick={closeDrawer}
             >
-              {t(`nav.${item.key}`)}
-            </Link>
-          ))}
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M6 6l12 12M18 6L6 18"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <nav className="flex-1 overflow-y-auto px-4 py-2" aria-label={t("mobileNav")}>
+          {NAV_ITEMS.map((item) => {
+            const active = isActive(item.href);
+
+            return (
+              <Link
+                key={item.key}
+                href={item.href}
+                onClick={closeDrawer}
+                className={`group flex items-center justify-between rounded-lg px-3 py-3.5 transition-colors ${
+                  active ? "bg-gold-bg/60 text-gold" : "text-ink hover:bg-cream"
+                }`}
+              >
+                <span className={`text-[15px] font-medium ${active ? "font-semibold" : ""}`}>
+                  {t(`nav.${item.key}`)}
+                </span>
+                <span
+                  className={`transition-colors ${
+                    active ? "text-gold" : "text-muted/50 group-hover:text-gold"
+                  }`}
+                >
+                  <ChevronRight />
+                </span>
+              </Link>
+            );
+          })}
         </nav>
+
+        <div className="border-t border-border bg-cream/30 px-6 py-5">
+          <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-muted">
+            {t("language")}
+          </p>
+          <LanguageSwitcher />
+
+          <Link
+            href="#"
+            onClick={closeDrawer}
+            className="mt-5 flex w-full items-center justify-center rounded-md bg-gold px-5 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90"
+          >
+            {t("cta")}
+          </Link>
+        </div>
       </aside>
     </>
   );

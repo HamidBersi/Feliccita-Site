@@ -17,6 +17,42 @@
     "closeMenu": "Menü schließen",
     "mainNav": "Hauptnavigation",
     "mobileNav": "Mobile Navigation",
-    "language": "Sprache"
+    "drawerTitle": "Menü",
+    "language": "Sprache",
+    "selectLanguage": "Sprache wählen",
+    "languages": {
+      "fr": "Français",
+      "en": "English",
+      "de": "Deutsch"
+    }
+  },
+  "Hero": {
+    "title": "Italienisches Restaurant & Pizzeria",
+    "titleLocation": "Furdenheim",
+    "subtitle": "Handgemachte Pizzen, frische Pasta und italienische Spezialitäten vor Ort, auf der Terrasse oder zum Mitnehmen.",
+    "order": "Online bestellen",
+    "reserve": "Tisch reservieren",
+    "imageAlt": "Restaurant-Innenraum La Félicità"
+  },
+  "InfoStrip": {
+    "rating": {
+      "title": "{rating}/5 auf Google"
+    },
+    "location": {
+      "title": "Furdenheim",
+      "subtitle": "15 rue du Stade, 67117 Furdenheim"
+    },
+    "phone": {
+      "title": "03 88 XX XX XX",
+      "subtitle": "Rufen Sie uns an zum Reservieren oder Bestellen"
+    },
+    "hours": {
+      "title": "Heute geöffnet",
+      "subtitle": "11:30 – 14:00 / 18:30 – 22:30"
+    },
+    "takeaway": {
+      "title": "Zum Mitnehmen",
+      "subtitle": "Online oder telefonisch bestellen"
+    }
   }
 }
