@@ -7,7 +7,7 @@ export default async function Hero() {
   const t = await getTranslations("Hero");
 
   return (
-    <section className="relative -mt-[68px] flex min-h-screen flex-col pt-[68px] lg:-mt-[68px] lg:h-full lg:min-h-0 lg:max-h-full lg:overflow-hidden lg:pt-[68px]">
+    <section className="relative flex h-full min-h-0 flex-col overflow-hidden pt-[68px]">
       <Image
         src="/images/Hero.jpg"
         alt={t("imageAlt")}
@@ -30,13 +30,8 @@ export default async function Hero() {
         reserve={t("reserve")}
       />
 
-      {/* Mobile + tablette : grille en flux */}
-      <div className="relative z-20 mt-10 px-4 pb-6 sm:px-6 md:mt-8 md:px-10 md:pb-10 lg:hidden">
-        <InfoStrip />
-      </div>
-
-      {/* Desktop : grille intégrée en bas, sans débordement */}
-      <div className="relative z-20 hidden shrink-0 px-10 pb-6 lg:block">
+      {/* Grille info en bas — tous breakpoints */}
+      <div className="relative z-20 shrink-0 px-4 pb-4 pt-3 sm:px-6 md:px-10 lg:px-10 lg:pb-5">
         <InfoStrip />
       </div>
     </section>

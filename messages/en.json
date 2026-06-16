@@ -40,19 +40,54 @@
     },
     "location": {
       "title": "Furdenheim",
-      "subtitle": "15 rue du Stade, 67117 Furdenheim"
+      "subtitle": "52 Rue de Strasbourg, 67117"
     },
     "phone": {
-      "title": "03 88 XX XX XX",
+      "title": "03 88 37 32 17",
       "subtitle": "Call us to book or order"
     },
     "hours": {
-      "title": "Open today",
-      "subtitle": "11:30 AM – 2:00 PM / 6:30 PM – 10:30 PM"
+      "open": "Open now",
+      "closed": "Currently closed",
+      "closedToday": "Closed today"
     },
     "takeaway": {
       "title": "Takeaway",
       "subtitle": "Order online or by phone"
     }
+  },
+  "HoursPage": {
+    "metaTitle": "Opening Hours — La Félicità",
+    "metaDescription": "Check La Félicità opening hours in Furdenheim: lunch, dinner and live open/closed status.",
+    "eyebrow": "Practical info",
+    "title": "Opening hours",
+    "subtitle": "Dine in, on the terrace or takeaway — find our lunch and dinner slots throughout the week.",
+    "back": "Back to home",
+    "statusOpen": "Open right now",
+    "statusClosed": "Closed right now",
+    "statusClosedToday": "Closed today",
+    "closed": "Closed",
+    "orderCta": "Order online",
+    "callCta": "Call the restaurant",
+    "days": {
+      "monday": "Monday",
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday",
+      "thursday": "Thursday",
+      "friday": "Friday",
+      "saturday": "Saturday",
+      "sunday": "Sunday"
+    }
+  },
+  "Reservation": {
+    "eyebrow": "Reservation",
+    "title": "Make a reservation",
+    "intro": "We look forward to welcoming you soon. Use our convenient online booking system.",
+    "onlineCta": "Book online",
+    "phoneQuestion": "Would you like to book by phone?",
+    "callCta": "Call 03 88 37 32 17",
+    "back": "Back",
+    "close": "Close",
+    "iframeTitle": "La Félicità reservation form"
   }
 }

@@ -1,6 +1,8 @@
 "use client";
 
 import HeroFadeIn from "@/components/HeroFadeIn";
+import ReservationButton from "@/components/ReservationButton";
+import { ORDER_URL } from "@/lib/constants";
 
 function CartIcon() {
   return (
@@ -57,8 +59,8 @@ export default function HeroContent({
   reserve,
 }: HeroContentProps) {
   return (
-    <div className="relative z-10 flex min-h-0 flex-1 flex-col items-center px-6 pb-10 pt-14 text-center sm:px-8 md:px-12 md:pb-8 md:pt-10 lg:items-start lg:px-20 lg:pb-4 lg:pt-4 lg:text-left">
-      <div className="flex min-h-0 w-full max-w-[520px] flex-1 flex-col justify-center lg:max-w-[560px]">
+    <div className="relative z-10 flex min-h-0 flex-1 flex-col items-center px-6 pb-2 pt-10 text-center sm:px-8 md:px-12 md:pt-8 lg:items-start lg:px-20 lg:pt-4 lg:text-left">
+      <div className="flex min-h-0 w-full max-w-[520px] flex-1 flex-col justify-center lg:max-w-[560px] lg:justify-start lg:pt-2">
         <HeroFadeIn delay={100}>
           <h1 className="drop-shadow-[0_2px_12px_rgba(0,0,0,0.45)]">
             <span className="block font-serif text-[26px] font-normal leading-[1.2] text-white sm:text-[28px] md:text-[44px]">
@@ -78,22 +80,21 @@ export default function HeroContent({
       </div>
 
       <HeroFadeIn delay={550}>
-        <div className="mt-8 flex w-full max-w-xs flex-col gap-2.5 sm:max-w-sm md:mt-0 md:max-w-none md:flex-row md:gap-4 lg:w-auto">
+        <div className="mt-6 mb-8 flex w-full max-w-xs shrink-0 flex-col gap-2.5 sm:max-w-sm md:mb-10 md:max-w-none md:flex-row md:gap-4 lg:mb-12">
           <a
-            href="#"
-            className="group inline-flex w-full items-center justify-center gap-2.5 rounded-md bg-gold px-8 py-3 text-xs font-medium text-white shadow-[0_4px_16px_rgba(196,154,42,0.3)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-[#d4aa35] hover:shadow-[0_12px_32px_rgba(196,154,42,0.5)] active:translate-y-0 md:gap-3 md:px-10 md:py-3.5 md:text-sm md:w-auto [&_svg]:transition-transform [&_svg]:duration-300 group-hover:[&_svg]:scale-110"
+            href={ORDER_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-md bg-gold px-7 py-2.5 text-xs font-medium text-white shadow-[0_4px_16px_rgba(196,154,42,0.3)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-[#d4aa35] hover:shadow-[0_12px_32px_rgba(196,154,42,0.5)] active:translate-y-0 md:w-auto md:px-9 md:py-2.5 md:text-sm lg:px-10 [&_svg]:transition-transform [&_svg]:duration-300 group-hover:[&_svg]:scale-110"
           >
             <CartIcon />
             {order}
           </a>
 
-          <a
-            href="#"
-            className="group inline-flex w-full items-center justify-center gap-2.5 rounded-md border-[1.5px] border-white bg-white/5 px-8 py-3 text-xs font-medium text-white backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-gold hover:bg-white hover:text-ink hover:shadow-[0_12px_32px_rgba(255,255,255,0.18)] active:translate-y-0 md:gap-3 md:px-10 md:py-3.5 md:text-sm md:w-auto [&_svg]:transition-transform [&_svg]:duration-300 group-hover:[&_svg]:scale-110"
-          >
+          <ReservationButton className="group inline-flex w-full cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-md border-[1.5px] border-white bg-white/5 px-7 py-2.5 text-xs font-medium text-white backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-gold hover:bg-white hover:text-ink hover:shadow-[0_12px_32px_rgba(255,255,255,0.18)] active:translate-y-0 md:w-auto md:px-9 md:py-2.5 md:text-sm lg:px-10 [&_svg]:transition-transform [&_svg]:duration-300 group-hover:[&_svg]:scale-110">
             <CalendarIcon />
             {reserve}
-          </a>
+          </ReservationButton>
         </div>
       </HeroFadeIn>
     </div>

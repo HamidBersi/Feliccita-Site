@@ -11,11 +11,9 @@ export default async function Home({ params }: Props) {
   setRequestLocale(locale);
 
   return (
-    <div className="lg:flex lg:h-screen lg:flex-col lg:overflow-hidden">
+    <div className="relative h-svh max-h-svh overflow-hidden supports-[height:100dvh]:h-dvh supports-[height:100dvh]:max-h-dvh">
+      <Hero />
       <Navbar />
-      <div className="lg:min-h-0 lg:flex-1">
-        <Hero />
-      </div>
     </div>
   );
 }

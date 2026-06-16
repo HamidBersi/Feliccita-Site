@@ -1,4 +1,5 @@
 import { unstable_cache } from "next/cache";
+import { GOOGLE_MAPS_REVIEWS_URL } from "@/lib/constants";
 
 export type GooglePlaceData = {
   rating: number;
@@ -12,8 +13,7 @@ function getFallback(): GooglePlaceData {
   return {
     rating: Number.isFinite(rating) ? rating : 4.4,
     reviewCount: 0,
-    mapsUrl:
-      "https://www.google.com/maps/search/?api=1&query=La+F%C3%A9licit%C3%A0+15+rue+du+Stade+67117+Furdenheim",
+    mapsUrl: GOOGLE_MAPS_REVIEWS_URL,
   };
 }
 
@@ -57,9 +57,7 @@ async function fetchGooglePlace(): Promise<GooglePlaceData> {
     return {
       rating: data.rating,
       reviewCount: data.userRatingCount ?? 0,
-      mapsUrl:
-        data.googleMapsUri ??
-        `https://search.google.com/local/reviews?placeid=${placeId}`,
+      mapsUrl: data.googleMapsUri ?? GOOGLE_MAPS_REVIEWS_URL,
     };
   } catch (error) {
     console.error("Google Places fetch failed:", error);

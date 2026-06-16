@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { ORDER_URL } from "@/lib/constants";
 import { Link, usePathname } from "@/i18n/navigation";
 
 const NAV_ITEMS = [
@@ -86,9 +87,15 @@ export default function Navbar() {
     return href === "/" ? pathname === "/" : false;
   }
 
+  const isHome = pathname === "/";
+
   return (
     <>
-      <header className="sticky top-0 z-[100] flex h-[68px] items-center justify-between gap-4 border-b border-border bg-white px-5 md:px-8 lg:px-10">
+      <header
+        className={`z-[100] flex h-[68px] shrink-0 items-center justify-between gap-4 border-b border-border bg-white px-5 md:px-8 lg:px-10 ${
+          isHome ? "absolute inset-x-0 top-0" : "sticky top-0"
+        }`}
+      >
         <Link href="/" className="flex min-w-0 shrink-0 items-center gap-2.5" onClick={closeDrawer}>
           <LogoIcon alt={t("logoAlt")} />
           <div className="flex min-w-0 flex-col">
@@ -126,12 +133,14 @@ export default function Navbar() {
 
         <div className="hidden shrink-0 items-center gap-3 lg:flex">
           <LanguageSwitcher />
-          <Link
-            href="#"
+          <a
+            href={ORDER_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center rounded-md bg-gold px-5 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-90"
           >
             {t("cta")}
-          </Link>
+          </a>
         </div>
 
         <button
@@ -214,13 +223,15 @@ export default function Navbar() {
           </p>
           <LanguageSwitcher />
 
-          <Link
-            href="#"
+          <a
+            href={ORDER_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             onClick={closeDrawer}
             className="mt-5 flex w-full items-center justify-center rounded-md bg-gold px-5 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90"
           >
             {t("cta")}
-          </Link>
+          </a>
         </div>
       </aside>
     </>

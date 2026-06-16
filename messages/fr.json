@@ -40,19 +40,54 @@
     },
     "location": {
       "title": "Furdenheim",
-      "subtitle": "15 rue du Stade, 67117 Furdenheim"
+      "subtitle": "52 Rue de Strasbourg, 67117"
     },
     "phone": {
-      "title": "03 88 XX XX XX",
+      "title": "03 88 37 32 17",
       "subtitle": "Appelez-nous pour réserver ou commander"
     },
     "hours": {
-      "title": "Ouvert aujourd'hui",
-      "subtitle": "11h30 – 14h00 / 18h30 – 22h30"
+      "open": "Service ouvert",
+      "closed": "Fermé actuellement",
+      "closedToday": "Fermé aujourd'hui"
     },
     "takeaway": {
       "title": "À emporter",
       "subtitle": "Commandez en ligne ou par téléphone"
     }
+  },
+  "HoursPage": {
+    "metaTitle": "Heures d'ouverture — La Félicità",
+    "metaDescription": "Consultez les horaires d'ouverture de La Félicità à Furdenheim : déjeuner, dîner et statut en temps réel.",
+    "eyebrow": "Informations pratiques",
+    "title": "Heures d'ouverture",
+    "subtitle": "Sur place, en terrasse ou à emporter — retrouvez nos créneaux pour déjeuner et dîner tout au long de la semaine.",
+    "back": "Retour à l'accueil",
+    "statusOpen": "Ouvert en ce moment",
+    "statusClosed": "Fermé en ce moment",
+    "statusClosedToday": "Fermé aujourd'hui",
+    "closed": "Fermé",
+    "orderCta": "Commander en ligne",
+    "callCta": "Appeler le restaurant",
+    "days": {
+      "monday": "Lundi",
+      "tuesday": "Mardi",
+      "wednesday": "Mercredi",
+      "thursday": "Jeudi",
+      "friday": "Vendredi",
+      "saturday": "Samedi",
+      "sunday": "Dimanche"
+    }
+  },
+  "Reservation": {
+    "eyebrow": "Réservation",
+    "title": "Faire une réservation",
+    "intro": "Nous nous réjouissons de vous accueillir bientôt. Utilisez notre système de réservation en ligne pratique.",
+    "onlineCta": "Réserver en ligne",
+    "phoneQuestion": "Voulez-vous réserver par téléphone ?",
+    "callCta": "Appeler le 03 88 37 32 17",
+    "back": "Retour",
+    "close": "Fermer",
+    "iframeTitle": "Formulaire de réservation La Félicità"
   }
 }

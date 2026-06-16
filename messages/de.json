@@ -40,19 +40,54 @@
     },
     "location": {
       "title": "Furdenheim",
-      "subtitle": "15 rue du Stade, 67117 Furdenheim"
+      "subtitle": "52 Rue de Strasbourg, 67117"
     },
     "phone": {
-      "title": "03 88 XX XX XX",
+      "title": "03 88 37 32 17",
       "subtitle": "Rufen Sie uns an zum Reservieren oder Bestellen"
     },
     "hours": {
-      "title": "Heute geöffnet",
-      "subtitle": "11:30 – 14:00 / 18:30 – 22:30"
+      "open": "Jetzt geöffnet",
+      "closed": "Derzeit geschlossen",
+      "closedToday": "Heute geschlossen"
     },
     "takeaway": {
       "title": "Zum Mitnehmen",
       "subtitle": "Online oder telefonisch bestellen"
     }
+  },
+  "HoursPage": {
+    "metaTitle": "Öffnungszeiten — La Félicità",
+    "metaDescription": "Öffnungszeiten von La Félicità in Furdenheim: Mittag, Abend und aktueller Geöffnet-Status.",
+    "eyebrow": "Praktische Infos",
+    "title": "Öffnungszeiten",
+    "subtitle": "Vor Ort, auf der Terrasse oder zum Mitnehmen — unsere Mittags- und Abendzeiten für die ganze Woche.",
+    "back": "Zurück zur Startseite",
+    "statusOpen": "Jetzt geöffnet",
+    "statusClosed": "Derzeit geschlossen",
+    "statusClosedToday": "Heute geschlossen",
+    "closed": "Geschlossen",
+    "orderCta": "Online bestellen",
+    "callCta": "Restaurant anrufen",
+    "days": {
+      "monday": "Montag",
+      "tuesday": "Dienstag",
+      "wednesday": "Mittwoch",
+      "thursday": "Donnerstag",
+      "friday": "Freitag",
+      "saturday": "Samstag",
+      "sunday": "Sonntag"
+    }
+  },
+  "Reservation": {
+    "eyebrow": "Reservierung",
+    "title": "Eine Reservierung vornehmen",
+    "intro": "Wir freuen uns, Sie bald bei uns begrüßen zu dürfen. Nutzen Sie unser praktisches Online-Reservierungssystem.",
+    "onlineCta": "Online reservieren",
+    "phoneQuestion": "Möchten Sie telefonisch reservieren?",
+    "callCta": "03 88 37 32 17 anrufen",
+    "back": "Zurück",
+    "close": "Schließen",
+    "iframeTitle": "Reservierungsformular La Félicità"
   }
 }
