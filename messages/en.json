@@ -8,6 +8,7 @@
     "tagline": "Italian Restaurant",
     "nav": {
       "home": "Home",
+      "menu": "Menu",
       "about": "About",
       "reviews": "Reviews",
       "contact": "Contact"
@@ -89,5 +90,30 @@
     "back": "Back",
     "close": "Close",
     "iframeTitle": "La Félicità reservation form"
+  },
+  "MenuPage": {
+    "metaTitle": "Menu — La Félicità",
+    "metaDescription": "Explore La Félicità menu: pizzas, pasta, salads, wines and Italian specialities in Furdenheim.",
+    "eyebrow": "Our menu",
+    "title": "Menu",
+    "subtitle": "Artisan pizzas, fresh pasta, antipasti and Italian specialities — filter by category to browse our menu.",
+    "back": "Back to home",
+    "filterAll": "All",
+    "ctaTitle": "Ready to order?",
+    "ctaSubtitle": "Order online or view the full PDF menu.",
+    "orderCta": "Order online",
+    "pdfCta": "PDF menu",
+    "categories": {
+      "entrees": "Starters",
+      "nos-pizzas": "Pizzas",
+      "nos-pizzas-speciales": "Special pizzas",
+      "nos-pates": "Pasta",
+      "nos-viandes": "Meat",
+      "nos-salades": "Salads",
+      "nos-boissons-sans-alcool": "Drinks",
+      "nos-vins-rouges": "Red wines",
+      "nos-vins-blancs": "White wines",
+      "nos-vins-roses": "Rosé wines"
+    }
   }
 }

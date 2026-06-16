@@ -13,6 +13,8 @@ export default async function Hero() {
         alt={t("imageAlt")}
         fill
         priority
+        fetchPriority="high"
+        quality={80}
         className="object-cover object-center brightness-105"
         sizes="100vw"
       />

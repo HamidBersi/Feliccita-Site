@@ -9,6 +9,7 @@ import { Link, usePathname } from "@/i18n/navigation";
 
 const NAV_ITEMS = [
   { key: "home", href: "/" },
+  { key: "menu", href: "/menu" },
   { key: "about", href: "#about" },
   { key: "reviews", href: "#reviews" },
   { key: "contact", href: "#contact" },
@@ -17,12 +18,12 @@ const NAV_ITEMS = [
 function LogoIcon({ alt }: { alt: string }) {
   return (
     <Image
-      src="/images/logo.png"
+      src="/images/logo.webp"
       alt={alt}
       width={65}
       height={65}
+      sizes="65px"
       className="shrink-0"
-      priority
     />
   );
 }
@@ -84,7 +85,15 @@ export default function Navbar() {
   }
 
   function isActive(href: string) {
-    return href === "/" ? pathname === "/" : false;
+    if (href === "/") {
+      return pathname === "/";
+    }
+
+    if (href.startsWith("/")) {
+      return pathname === href;
+    }
+
+    return false;
   }
 
   const isHome = pathname === "/";

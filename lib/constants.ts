@@ -1,3 +1,6 @@
+export const MENU_PDF_URL =
+  "https://cdn.website.dish.co/media/06/94/9554544/Carte-Menu.pdf";
+
 export const ORDER_URL =
   "https://lafelicitafurdenheim.order.app.hd.digital/menus";
 
