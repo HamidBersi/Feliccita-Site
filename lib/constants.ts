@@ -25,3 +25,10 @@ export const GOOGLE_MAPS_PLACE_URL =
 
 export const GOOGLE_MAPS_REVIEWS_URL =
   "https://www.google.com/maps/place/La+Felicita/@48.6113991,7.5512431,17z/data=!4m17!1m8!3m7!1s0x4796b1509c1f4131:0x2bea8a64107ff1e2!2sLa+Felicita!8m2!3d48.6113991!4d7.553818!10e1!16s%2Fg%2F11g0zry3bj!3m7!1s0x4796b1509c1f4131:0x2bea8a64107ff1e2!8m2!3d48.6113991!4d7.553818!9m1!1b1!16s%2Fg%2F11g0zry3bj?entry=ttu";
+
+export const FACEBOOK_URL =
+  "https://www.facebook.com/Restaurant-F%C3%A9licit%C3%A0-%C3%A0-Furdenheim-174827229850250/";
+
+export const INSTAGRAM_URL = process.env.INSTAGRAM_URL ?? "";
+
+export const TIKTOK_URL = process.env.TIKTOK_URL ?? "";

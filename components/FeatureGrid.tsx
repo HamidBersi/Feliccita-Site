@@ -70,6 +70,21 @@ function BagIcon() {
   );
 }
 
+function DailyIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M12 3l1.8 4.2L18 9l-4.2 1.8L12 15l-1.8-4.2L6 9l4.2-1.8L12 3Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+      <path d="M5 19h14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M8 16h8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 function GalleryIcon() {
   return (
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -139,14 +154,14 @@ function GallerySlider({
         <p className="mt-2 text-sm text-muted">{t("gallery.text")}</p>
       </div>
 
-      <div className="relative bg-ink">
-        <div className="relative aspect-[4/3] sm:aspect-[16/10]">
+      <div className="relative bg-cream">
+        <div className="relative aspect-[4/3] min-h-[240px] sm:aspect-[16/10] sm:min-h-[320px]">
           <Image
             key={currentSrc}
             src={currentSrc}
             alt={t("gallery.photoAlt", { number: slideIndex + 1 })}
             fill
-            className="object-cover"
+            className="object-contain p-1 sm:p-2"
             sizes="(max-width: 768px) 100vw, 896px"
             priority
           />
@@ -258,6 +273,16 @@ export default function FeatureGridClient() {
       linkKey: "pasta.link",
     },
     {
+      id: "daily",
+      type: "expand",
+      image: "/images/Suggestion_Grille3.png",
+      imageAltKey: "daily.imageAlt",
+      icon: <DailyIcon />,
+      titleKey: "daily.title",
+      textKey: "daily.text",
+      linkKey: "daily.link",
+    },
+    {
       id: "terrace",
       type: "expand",
       image: "/images/Terrasse_Grille3.jpg",
@@ -348,34 +373,42 @@ export default function FeatureGridClient() {
     <>
       <section
         id="reviews"
-        className="scroll-mt-[68px] bg-[#f3efe6] px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24"
+        className="scroll-mt-[68px] bg-[#f3efe6] px-5 py-10 sm:px-8 sm:py-14 lg:px-10 lg:py-16"
       >
         <div className="mx-auto max-w-6xl">
-          <div className="mb-10 text-center lg:mb-12">
+          <div className="mb-6 text-center sm:mb-8 lg:mb-10">
             <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-gold">
               {t("eyebrow")}
             </p>
-            <h2 className="mt-3 font-serif text-3xl text-ink sm:text-4xl">
+            <h2 className="mt-2 font-serif text-2xl text-ink sm:mt-3 sm:text-4xl">
               {t("title")}
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 items-start gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3 lg:gap-5">
             {cards.map((card) => {
               const content = (
                 <>
                   {card.image ? (
-                    <div className="relative aspect-[4/3] overflow-hidden">
+                    <div
+                      className={`relative aspect-[21/9] overflow-hidden sm:aspect-[2/1] ${
+                        card.type === "gallery" ? "bg-cream" : ""
+                      }`}
+                    >
                       <Image
                         src={card.image}
                         alt={t(card.imageAltKey)}
                         fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        className={
+                          card.type === "gallery"
+                            ? "object-contain p-1"
+                            : "object-cover transition-transform duration-500 group-hover:scale-105"
+                        }
                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       />
                       {card.type === "gallery" ? (
                         <div className="absolute inset-0 flex items-center justify-center bg-black/20 transition-colors group-hover:bg-black/30">
-                          <span className="rounded-full bg-white/90 px-3 py-1.5 text-xs font-medium text-ink shadow-lg">
+                          <span className="rounded-full bg-white/90 px-2.5 py-1 text-[11px] font-medium text-ink shadow-lg">
                             {t("gallery.badge", { count: GALLERY_IMAGES.length })}
                           </span>
                         </div>
@@ -383,18 +416,24 @@ export default function FeatureGridClient() {
                     </div>
                   ) : null}
 
-                  <div className="relative px-5 pb-6 pt-8">
-                    <div className="absolute -top-5 left-5 flex h-10 w-10 items-center justify-center rounded-full bg-gold text-white shadow-[0_4px_16px_rgba(196,154,42,0.35)]">
+                  <div className="relative px-3 pb-2.5 pt-5 sm:px-3.5 sm:pb-3 sm:pt-5">
+                    <div className="absolute -top-3 left-3 flex h-7 w-7 items-center justify-center rounded-full bg-gold text-white shadow-[0_3px_12px_rgba(196,154,42,0.35)]">
                       {card.icon}
                     </div>
 
-                    <h3 className="font-serif text-xl text-ink">{t(card.titleKey)}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-muted">{t(card.textKey)}</p>
+                    <h3 className="line-clamp-2 font-serif text-[14px] leading-tight text-ink sm:text-[15px]">
+                      {t(card.titleKey)}
+                    </h3>
+                    <p className="mt-1 line-clamp-2 hidden text-[11px] leading-snug text-muted sm:block sm:text-xs">
+                      {t(card.textKey)}
+                    </p>
 
                     {card.linkKey ? (
-                      <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-gold transition-colors group-hover:text-ink">
+                      <span className="mt-1.5 inline-flex items-center gap-1 text-[11px] font-medium text-gold sm:mt-2 sm:text-xs">
                         {t(card.linkKey)}
-                        <span aria-hidden="true">→</span>
+                        <span className="text-gold" aria-hidden="true">
+                          →
+                        </span>
                       </span>
                     ) : null}
                   </div>
@@ -402,7 +441,7 @@ export default function FeatureGridClient() {
               );
 
               const cardClassName =
-                "group relative flex h-full flex-col overflow-hidden rounded-2xl border border-black/8 bg-white text-left shadow-[0_4px_24px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:border-gold/40 hover:shadow-[0_16px_40px_rgba(196,154,42,0.15)] active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold";
+                "group relative flex flex-col overflow-hidden rounded-xl border border-black/8 bg-white text-left shadow-[0_4px_24px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:border-gold/40 hover:shadow-[0_16px_40px_rgba(196,154,42,0.15)] active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold sm:rounded-2xl";
 
               if (card.type === "link" && card.href) {
                 return (

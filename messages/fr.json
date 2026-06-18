@@ -30,7 +30,7 @@
   "Hero": {
     "title": "Restaurant italien & pizzeria",
     "titleLocation": "Furdenheim",
-    "subtitle": "Pizzas artisanales, pâtes fraîches et spécialités italiennes à déguster sur place, en terrasse ou à emporter.",
+    "subtitle": "Fermentation 72h, biga traditionnelle et produits italiens sélectionnés — plus de 8 ans de passion à Furdenheim.",
     "order": "Commander en ligne",
     "reserve": "Réserver une table",
     "imageAlt": "Intérieur du restaurant La Félicità"
@@ -119,9 +119,8 @@
   "About": {
     "eyebrow": "Notre histoire",
     "title": "À propos de nous",
-    "lead": "L'histoire de La Félicità a commencé il y a plus de 8 ans avec une idée simple : créer un lieu où l'on se sent bien, où l'on partage un bon repas et où l'on retrouve l'authenticité de la cuisine italienne.",
-    "body": "Depuis son ouverture, le restaurant a grandi sans jamais perdre son âme. Fidèle à ses valeurs, La Félicità continue de proposer une cuisine généreuse, un accueil chaleureux et une expérience conviviale qui rassemble familles, amis et amoureux de la gastronomie italienne.",
-    "closing": "Aujourd'hui encore, nous sommes fiers de faire vivre cet esprit qui anime notre maison depuis le premier jour."
+    "lead": "L'histoire de La Félicità a commencé il y a plus de 8 ans avec une idée simple : créer un lieu où l'on se sent bien et où l'on retrouve l'authenticité de la cuisine italienne.",
+    "body": "Depuis le premier jour, nous proposons une cuisine italienne généreuse, des produits soigneusement sélectionnés et un accueil chaleureux qui font l'âme de notre maison."
   },
   "FeatureGrid": {
     "eyebrow": "Nos spécialités",
@@ -129,7 +128,7 @@
     "close": "Fermer",
     "pizza": {
       "title": "Pizzas maison",
-      "text": "Pâtes fraîches, ingrédients sélectionnés et cuisson au four pour des pizzas savoureuses et authentiques.",
+      "text": "Pâte levée 72h à la biga, produits italiens sélectionnés et cuisson au four pour des pizzas authentiques.",
       "link": "En savoir plus",
       "imageAlt": "Pizza cuite au four à bois"
     },
@@ -138,6 +137,12 @@
       "text": "Linguini, rigatoni, ravioles et spécialités maison préparées avec des produits frais et une touche de tradition italienne.",
       "link": "En savoir plus",
       "imageAlt": "Plats de pâtes italiennes"
+    },
+    "daily": {
+      "title": "Suggestions & plats du jour",
+      "text": "Des créations qui évoluent selon les arrivages frais et l'inspiration du moment — venez découvrir nos nouveautés en salle.",
+      "link": "En savoir plus",
+      "imageAlt": "Suggestions et plats du jour La Félicità"
     },
     "terrace": {
       "title": "Terrasse agréable",
@@ -167,7 +172,7 @@
   "Contact": {
     "eyebrow": "Nous trouver",
     "title": "Contact",
-    "subtitle": "Nous sommes là pour vous accueillir — réservez une table, commandez à emporter ou venez nous rendre visite à Furdenheim.",
+    "subtitle": "Nous sommes là pour vous accueillir, répondre à vos questions et vous offrir la meilleure expérience possible.",
     "address": {
       "title": "Adresse",
       "text": "52 Rue de Strasbourg, 67117 Furdenheim",
@@ -175,21 +180,29 @@
     },
     "phone": {
       "title": "Téléphone",
-      "text": "03 88 37 32 17 — appelez-nous pour réserver ou commander.",
+      "text": "03 88 37 32 17",
       "link": "Nous appeler"
     },
     "hours": {
       "title": "Horaires",
-      "text": "Déjeuner et dîner toute la semaine — consultez notre statut en temps réel.",
+      "text": "Déjeuner et dîner toute la semaine. Consultez notre statut en temps réel.",
       "link": "Voir les horaires"
     },
-    "reserve": {
-      "title": "Réservation",
-      "text": "Réservez une table en ligne ou par téléphone pour votre prochaine visite.",
-      "link": "Réserver une table"
+    "social": {
+      "title": "Suivez-nous",
+      "instagram": "Instagram La Félicità",
+      "tiktok": "TikTok La Félicità",
+      "facebook": "Facebook La Félicità",
+      "google": "Avis Google La Félicità"
     },
     "mapTitle": "La Félicità sur Google Maps",
+    "mapReviews": "{rating} ★ ({count} avis Google)",
+    "mapRating": "{rating}/5 sur Google",
     "orderCta": "Commander en ligne",
-    "callCta": "Appeler le restaurant"
+    "callCta": "Appeler le restaurant",
+    "thanks": "Merci pour votre confiance et à très bientôt !"
+  },
+  "Footer": {
+    "copyright": "© {year} La Félicità — Tous droits réservés"
   }
 }

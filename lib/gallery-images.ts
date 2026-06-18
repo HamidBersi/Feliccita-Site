@@ -1,6 +1,5 @@
 export const GALLERY_IMAGES = [
   "/images/Gallerie_photo9.jpg",
-  "/images/Gallerie_Photo1.png",
   "/images/Gallerie_image2.jpg",
   "/images/Gallerie_photo3.jpg",
   "/images/Gallerie_photo4.jpg",

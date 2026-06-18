@@ -30,7 +30,7 @@
   "Hero": {
     "title": "Italian restaurant & pizzeria",
     "titleLocation": "Furdenheim",
-    "subtitle": "Artisan pizzas, fresh pasta and Italian specialities to enjoy dine in, on the terrace or takeaway.",
+    "subtitle": "72h fermentation, traditional biga and selected Italian products — over 8 years of passion in Furdenheim.",
     "order": "Order online",
     "reserve": "Book a table",
     "imageAlt": "La Félicità restaurant interior"
@@ -119,9 +119,8 @@
   "About": {
     "eyebrow": "Our story",
     "title": "About us",
-    "lead": "The story of La Félicità began over 8 years ago with a simple idea: to create a place where people feel welcome, share a good meal and rediscover the authenticity of Italian cuisine.",
-    "body": "Since opening, the restaurant has grown without ever losing its soul. True to its values, La Félicità continues to offer generous cooking, a warm welcome and a convivial experience that brings together families, friends and lovers of Italian gastronomy.",
-    "closing": "Even today, we are proud to keep alive the spirit that has driven our house since day one."
+    "lead": "La Félicità began over 8 years ago with a simple idea: create a place where people feel welcome and rediscover authentic Italian cuisine.",
+    "body": "From day one, we offer generous Italian cuisine, carefully selected products and a warm welcome that are the soul of our house."
   },
   "FeatureGrid": {
     "eyebrow": "Our specialities",
@@ -129,7 +128,7 @@
     "close": "Close",
     "pizza": {
       "title": "Homemade pizzas",
-      "text": "Fresh dough, selected ingredients and oven baking for flavourful, authentic pizzas.",
+      "text": "72h biga-raised dough, selected Italian products and oven baking for authentic pizzas.",
       "link": "Learn more",
       "imageAlt": "Pizza baked in a wood-fired oven"
     },
@@ -138,6 +137,12 @@
       "text": "Linguini, rigatoni, ravioli and house specialities prepared with fresh products and a touch of Italian tradition.",
       "link": "Learn more",
       "imageAlt": "Italian pasta dishes"
+    },
+    "daily": {
+      "title": "Suggestions & daily specials",
+      "text": "Creations that change with fresh arrivals and the chef's inspiration — come and discover what's new today.",
+      "link": "Learn more",
+      "imageAlt": "Daily specials and chef's suggestions at La Félicità"
     },
     "terrace": {
       "title": "Pleasant terrace",
@@ -166,8 +171,8 @@
   },
   "Contact": {
     "eyebrow": "Get in touch",
-    "title": "Contact us",
-    "subtitle": "We're here to welcome you — book a table, order takeaway or come and see us in Furdenheim.",
+    "title": "Contact",
+    "subtitle": "We're here to welcome you, answer your questions and offer you the best experience possible.",
     "address": {
       "title": "Address",
       "text": "52 Rue de Strasbourg, 67117 Furdenheim",
@@ -175,21 +180,29 @@
     },
     "phone": {
       "title": "Phone",
-      "text": "03 88 37 32 17 — call us to book or order.",
+      "text": "03 88 37 32 17",
       "link": "Call us"
     },
     "hours": {
       "title": "Opening hours",
-      "text": "Lunch and dinner throughout the week — check our live opening status.",
+      "text": "Lunch and dinner throughout the week. Check our live opening status.",
       "link": "View hours"
     },
-    "reserve": {
-      "title": "Reservation",
-      "text": "Book a table online or by phone for your next visit.",
-      "link": "Book a table"
+    "social": {
+      "title": "Follow us",
+      "instagram": "La Félicità on Instagram",
+      "tiktok": "La Félicità on TikTok",
+      "facebook": "La Félicità on Facebook",
+      "google": "La Félicità on Google"
     },
     "mapTitle": "La Félicità on Google Maps",
+    "mapReviews": "{rating} ★ ({count} Google reviews)",
+    "mapRating": "{rating}/5 on Google",
     "orderCta": "Order online",
-    "callCta": "Call the restaurant"
+    "callCta": "Call the restaurant",
+    "thanks": "Thank you for your trust — see you soon!"
+  },
+  "Footer": {
+    "copyright": "© {year} La Félicità — All rights reserved"
   }
 }
