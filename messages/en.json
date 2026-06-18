@@ -115,5 +115,81 @@
       "nos-vins-blancs": "White wines",
       "nos-vins-roses": "Rosé wines"
     }
+  },
+  "About": {
+    "eyebrow": "Our story",
+    "title": "About us",
+    "lead": "The story of La Félicità began over 8 years ago with a simple idea: to create a place where people feel welcome, share a good meal and rediscover the authenticity of Italian cuisine.",
+    "body": "Since opening, the restaurant has grown without ever losing its soul. True to its values, La Félicità continues to offer generous cooking, a warm welcome and a convivial experience that brings together families, friends and lovers of Italian gastronomy.",
+    "closing": "Even today, we are proud to keep alive the spirit that has driven our house since day one."
+  },
+  "FeatureGrid": {
+    "eyebrow": "Our specialities",
+    "title": "Discover La Félicità",
+    "close": "Close",
+    "pizza": {
+      "title": "Homemade pizzas",
+      "text": "Fresh dough, selected ingredients and oven baking for flavourful, authentic pizzas.",
+      "link": "Learn more",
+      "imageAlt": "Pizza baked in a wood-fired oven"
+    },
+    "pasta": {
+      "title": "Pasta & Italian dishes",
+      "text": "Linguini, rigatoni, ravioli and house specialities prepared with fresh products and a touch of Italian tradition.",
+      "link": "Learn more",
+      "imageAlt": "Italian pasta dishes"
+    },
+    "terrace": {
+      "title": "Pleasant terrace",
+      "text": "Enjoy our terrace in a warm, friendly atmosphere — perfect for dining al fresco.",
+      "link": "Learn more",
+      "imageAlt": "La Félicità restaurant terrace"
+    },
+    "takeaway": {
+      "title": "Takeaway",
+      "text": "Order online or by phone and pick up your order quickly.",
+      "link": "Order",
+      "imageAlt": "La Félicità takeaway"
+    },
+    "gallery": {
+      "title": "Discover the restaurant",
+      "text": "Browse our gallery and step into the warm atmosphere of La Félicità.",
+      "link": "View gallery",
+      "badge": "{count} photos",
+      "cardImageAlt": "La Félicità restaurant photo gallery",
+      "photoAlt": "La Félicità restaurant photo {number}",
+      "prev": "Previous photo",
+      "next": "Next photo",
+      "counter": "{current} / {total}",
+      "goTo": "Go to photo {number}"
+    }
+  },
+  "Contact": {
+    "eyebrow": "Get in touch",
+    "title": "Contact us",
+    "subtitle": "We're here to welcome you — book a table, order takeaway or come and see us in Furdenheim.",
+    "address": {
+      "title": "Address",
+      "text": "52 Rue de Strasbourg, 67117 Furdenheim",
+      "link": "Get directions"
+    },
+    "phone": {
+      "title": "Phone",
+      "text": "03 88 37 32 17 — call us to book or order.",
+      "link": "Call us"
+    },
+    "hours": {
+      "title": "Opening hours",
+      "text": "Lunch and dinner throughout the week — check our live opening status.",
+      "link": "View hours"
+    },
+    "reserve": {
+      "title": "Reservation",
+      "text": "Book a table online or by phone for your next visit.",
+      "link": "Book a table"
+    },
+    "mapTitle": "La Félicità on Google Maps",
+    "orderCta": "Order online",
+    "callCta": "Call the restaurant"
   }
 }

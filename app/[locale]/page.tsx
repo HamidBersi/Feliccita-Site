@@ -1,3 +1,6 @@
+import AboutSection from "@/components/AboutSection";
+import ContactSection from "@/components/ContactSection";
+import FeatureGridSection from "@/components/FeatureGridSection";
 import Hero from "@/components/Hero";
 import Navbar from "@/components/Navbar";
 import { setRequestLocale } from "next-intl/server";
@@ -11,9 +14,14 @@ export default async function Home({ params }: Props) {
   setRequestLocale(locale);
 
   return (
-    <div className="relative h-svh max-h-svh overflow-hidden supports-[height:100dvh]:h-dvh supports-[height:100dvh]:max-h-dvh">
-      <Hero />
-      <Navbar />
-    </div>
+    <>
+      <div className="relative h-svh max-h-svh overflow-hidden supports-[height:100dvh]:h-dvh supports-[height:100dvh]:max-h-dvh">
+        <Hero />
+        <Navbar />
+      </div>
+      <AboutSection />
+      <FeatureGridSection />
+      <ContactSection />
+    </>
   );
 }

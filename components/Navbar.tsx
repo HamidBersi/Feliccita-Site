@@ -10,9 +10,9 @@ import { Link, usePathname } from "@/i18n/navigation";
 const NAV_ITEMS = [
   { key: "home", href: "/" },
   { key: "menu", href: "/menu" },
-  { key: "about", href: "#about" },
-  { key: "reviews", href: "#reviews" },
-  { key: "contact", href: "#contact" },
+  { key: "about", href: "/#about" },
+  { key: "reviews", href: "/#reviews" },
+  { key: "contact", href: "/#contact" },
 ] as const;
 
 function LogoIcon({ alt }: { alt: string }) {
