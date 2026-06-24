@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import MenuPageContent from "@/components/MenuPageContent";
+import RestaurantMenu from "@/components/RestaurantMenu";
 import Navbar from "@/components/Navbar";
-import { getMenuCategories } from "@/lib/menu";
+import { getMenuItems } from "@/lib/menu";
 import { Link } from "@/i18n/navigation";
 
 type Props = {
@@ -24,7 +24,7 @@ export default async function MenuPage({ params }: Props) {
   setRequestLocale(locale);
 
   const t = await getTranslations("MenuPage");
-  const categories = getMenuCategories();
+  const menuItems = getMenuItems();
 
   return (
     <div className="relative min-h-svh supports-[height:100dvh]:min-h-dvh">
@@ -64,8 +64,8 @@ export default async function MenuPage({ params }: Props) {
           </div>
         </section>
 
-        <section className="px-5 py-12 sm:px-8 lg:px-10 lg:py-14">
-          <MenuPageContent categories={categories} locale={locale} />
+        <section className="bg-cream px-5 py-12 sm:px-8 lg:px-10 lg:py-14">
+          <RestaurantMenu menuItems={menuItems} locale={locale} />
         </section>
       </main>
     </div>

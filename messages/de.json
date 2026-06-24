@@ -30,7 +30,7 @@
   "Hero": {
     "title": "Italienisches Restaurant & Pizzeria",
     "titleLocation": "Furdenheim",
-    "subtitle": "72h Fermentation, traditionelle Biga und ausgewählte italienische Produkte — über 8 Jahre Leidenschaft in Furdenheim.",
+    "subtitle": "Handgemachte Pizzen, frische Pasta und italienische Spezialitäten vor Ort, auf der Terrasse oder zum Mitnehmen.",
     "order": "Online bestellen",
     "reserve": "Tisch reservieren",
     "imageAlt": "Restaurant-Innenraum La Félicità"
@@ -99,21 +99,22 @@
     "subtitle": "Handgemachte Pizzen, frische Pasta, Antipasti und italienische Spezialitäten — nach Kategorie filtern.",
     "back": "Zurück zur Startseite",
     "filterAll": "Alle",
+    "badgeSignature": "Signature",
+    "badgePopular": "Beliebt",
+    "emptyCategory": "Derzeit keine Gerichte in dieser Kategorie.",
     "ctaTitle": "Bereit zu bestellen?",
-    "ctaSubtitle": "Online bestellen oder die vollständige PDF-Karte ansehen.",
+    "ctaSubtitle": "In wenigen Klicks online bestellen.",
     "orderCta": "Online bestellen",
     "pdfCta": "PDF-Karte",
     "categories": {
       "entrees": "Vorspeisen",
-      "nos-pizzas": "Pizzen",
-      "nos-pizzas-speciales": "Spezial-Pizzen",
-      "nos-pates": "Pasta",
-      "nos-viandes": "Fleisch",
-      "nos-salades": "Salate",
-      "nos-boissons-sans-alcool": "Getränke",
-      "nos-vins-rouges": "Rotweine",
-      "nos-vins-blancs": "Weißweine",
-      "nos-vins-roses": "Roséweine"
+      "salades": "Salate",
+      "viandes": "Fleisch",
+      "pates": "Pasta",
+      "pizzas": "Pizzen",
+      "desserts": "Desserts",
+      "boissons": "Getränke",
+      "vins": "Weine"
     }
   },
   "About": {
@@ -127,21 +128,24 @@
     "title": "Entdecken Sie La Félicità",
     "close": "Schließen",
     "pizza": {
-      "title": "Hausgemachte Pizzen",
-      "text": "72h Biga-Teig, ausgewählte italienische Produkte und Ofenbacken für authentische Pizzen.",
+      "title": "Handgemachte Pizzen",
+      "text": "Mit traditioneller Biga und 72 Stunden Reifezeit — unsere leichten Pizzen feiern die ganze Authentizität Italiens.",
+      "textFull": "Mit traditioneller Biga zubereitet und 72 Stunden gereift, entwickeln unsere Pizzen einen leichten, schmackhaften und leicht verdaulichen Teig. Mit sorgfältig ausgewählten italienischen Produkten belegt, feiern sie die ganze Authentizität der italienischen Küche.",
       "link": "Mehr erfahren",
       "imageAlt": "Pizza aus dem Holzofen"
     },
     "pasta": {
-      "title": "Pasta & italienische Gerichte",
-      "text": "Linguini, Rigatoni, Ravioli und Hausspezialitäten mit frischen Produkten und italienischer Tradition.",
+      "title": "Pasta & italienische Spezialitäten",
+      "text": "Von Ravioli bis Linguini — unsere Rezepte mit frischen Zutaten und besonderer Aufmerksamkeit für italienische Aromen.",
+      "textFull": "Von Ravioli bis Linguini werden unsere Rezepte mit frischen Zutaten und besonderer Aufmerksamkeit für die Aromen zubereitet. Eine großzügige Küche, inspiriert von italienischen Traditionen und mit Leidenschaft zubereitet.",
       "link": "Mehr erfahren",
       "imageAlt": "Italienische Pastagerichte"
     },
     "daily": {
       "title": "Empfehlungen & Tagesgerichte",
-      "text": "Kreationen, die sich nach frischen Lieferungen und der Inspiration des Moments richten — entdecken Sie unsere Neuheiten vor Ort.",
-      "link": "Mehr erfahren",
+      "text": "Im Rhythmus der Jahreszeiten und frischer Lieferungen erneuert sich unsere Küche — lassen Sie sich von unseren Kreationen überraschen.",
+      "textFull": "Im Rhythmus der Jahreszeiten und frischer Lieferungen erneuert sich unsere Küche regelmäßig, um Ihnen neue Aromen zu entdecken. Lassen Sie sich von den Inspirationen des Moments und den Kreationen unseres Teams überraschen.",
+      "link": "Tagesvorschläge ansehen",
       "imageAlt": "Tagesgerichte und Empfehlungen bei La Félicità"
     },
     "terrace": {

@@ -11,7 +11,6 @@ import {
   GOOGLE_MAPS_PLACE_URL,
   GOOGLE_MAPS_REVIEWS_URL,
   INSTAGRAM_URL,
-  ORDER_URL,
   PHONE_HREF,
   TIKTOK_URL,
 } from "@/lib/constants";
@@ -52,22 +51,6 @@ function ClockIcon() {
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5" />
       <path d="M12 7v5l3 2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function CartIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path
-        d="M6 6H21L19 14H8L6 6ZM6 6L5 3H2"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <circle cx="9" cy="19" r="1.5" fill="currentColor" />
-      <circle cx="17" cy="19" r="1.5" fill="currentColor" />
     </svg>
   );
 }
@@ -278,26 +261,7 @@ export default async function ContactSection() {
           </div>
         </div>
 
-        <div className="mt-5 flex flex-col items-center justify-center gap-2.5 sm:flex-row sm:gap-3">
-          <a
-            href={ORDER_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex w-full max-w-[200px] items-center justify-center gap-1.5 rounded-lg bg-gold px-4 py-2.5 text-xs font-medium text-white shadow-[0_4px_16px_rgba(196,154,42,0.3)] transition-opacity hover:opacity-90"
-          >
-            <CartIcon />
-            {t("orderCta")}
-          </a>
-          <a
-            href={PHONE_HREF}
-            className="inline-flex w-full max-w-[200px] items-center justify-center gap-1.5 rounded-lg border border-gold bg-transparent px-4 py-2.5 text-xs font-medium text-gold transition-colors hover:bg-gold/5"
-          >
-            <PhoneIcon />
-            {t("callCta")}
-          </a>
-        </div>
-
-        <p className="mt-4 text-center text-xs italic text-muted">
+        <p className="mt-5 text-center text-xs italic text-muted">
           <span aria-hidden="true">❤️ </span>
           {t("thanks")}
         </p>

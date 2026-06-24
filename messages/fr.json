@@ -30,7 +30,7 @@
   "Hero": {
     "title": "Restaurant italien & pizzeria",
     "titleLocation": "Furdenheim",
-    "subtitle": "Fermentation 72h, biga traditionnelle et produits italiens sélectionnés — plus de 8 ans de passion à Furdenheim.",
+    "subtitle": "Pizzas artisanales, pâtes fraîches et spécialités italiennes à déguster sur place, en terrasse ou à emporter.",
     "order": "Commander en ligne",
     "reserve": "Réserver une table",
     "imageAlt": "Intérieur du restaurant La Félicità"
@@ -99,21 +99,22 @@
     "subtitle": "Pizzas artisanales, pâtes fraîches, antipasti et spécialités italiennes — filtrez par catégorie pour explorer notre carte.",
     "back": "Retour à l'accueil",
     "filterAll": "Tout",
+    "badgeSignature": "Signature",
+    "badgePopular": "Populaire",
+    "emptyCategory": "Aucun plat dans cette catégorie pour le moment.",
     "ctaTitle": "Prêt à commander ?",
-    "ctaSubtitle": "Commandez en ligne ou consultez la carte PDF complète.",
+    "ctaSubtitle": "Commandez en ligne en quelques clics.",
     "orderCta": "Commander en ligne",
     "pdfCta": "Carte PDF",
     "categories": {
       "entrees": "Entrées",
-      "nos-pizzas": "Pizzas",
-      "nos-pizzas-speciales": "Pizzas spéciales",
-      "nos-pates": "Pâtes",
-      "nos-viandes": "Viandes",
-      "nos-salades": "Salades",
-      "nos-boissons-sans-alcool": "Boissons",
-      "nos-vins-rouges": "Vins rouges",
-      "nos-vins-blancs": "Vins blancs",
-      "nos-vins-roses": "Vins rosés"
+      "salades": "Salades",
+      "viandes": "Viandes",
+      "pates": "Pâtes",
+      "pizzas": "Pizzas",
+      "desserts": "Desserts",
+      "boissons": "Boissons",
+      "vins": "Vins"
     }
   },
   "About": {
@@ -127,21 +128,24 @@
     "title": "Découvrez La Félicità",
     "close": "Fermer",
     "pizza": {
-      "title": "Pizzas maison",
-      "text": "Pâte levée 72h à la biga, produits italiens sélectionnés et cuisson au four pour des pizzas authentiques.",
+      "title": "Pizzas artisanales",
+      "text": "Préparées avec une biga traditionnelle et maturées 72 heures, nos pizzas légères célèbrent toute l'authenticité de l'Italie.",
+      "textFull": "Préparées avec une biga traditionnelle et maturées pendant 72 heures, nos pizzas développent une pâte légère, savoureuse et facile à digérer. Garnies de produits italiens soigneusement sélectionnés, elles célèbrent toute l'authenticité de la cuisine italienne.",
       "link": "En savoir plus",
       "imageAlt": "Pizza cuite au four à bois"
     },
     "pasta": {
-      "title": "Pâtes et plats italiens",
-      "text": "Linguini, rigatoni, ravioles et spécialités maison préparées avec des produits frais et une touche de tradition italienne.",
+      "title": "Pâtes & spécialités italiennes",
+      "text": "Des ravioles aux linguini, nos recettes élaborées avec ingrédients frais et une attention particulière aux saveurs italiennes.",
+      "textFull": "Des ravioles aux linguini, nos recettes sont élaborées avec des ingrédients frais et une attention particulière portée aux saveurs. Une cuisine généreuse, inspirée des traditions italiennes et préparée avec passion.",
       "link": "En savoir plus",
       "imageAlt": "Plats de pâtes italiennes"
     },
     "daily": {
       "title": "Suggestions & plats du jour",
-      "text": "Des créations qui évoluent selon les arrivages frais et l'inspiration du moment — venez découvrir nos nouveautés en salle.",
-      "link": "En savoir plus",
+      "text": "Au rythme des saisons et des arrivages, notre cuisine se renouvelle — laissez-vous surprendre par nos créations du moment.",
+      "textFull": "Au rythme des saisons et des arrivages, notre cuisine se renouvelle régulièrement pour vous faire découvrir de nouvelles saveurs. Laissez-vous surprendre par les inspirations du moment et les créations de notre équipe.",
+      "link": "Voir les suggestions du jour",
       "imageAlt": "Suggestions et plats du jour La Félicità"
     },
     "terrace": {

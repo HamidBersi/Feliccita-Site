@@ -1,6 +1,3 @@
-export const MENU_PDF_URL =
-  "https://cdn.website.dish.co/media/06/94/9554544/Carte-Menu.pdf";
-
 export const ORDER_URL =
   "https://lafelicitafurdenheim.order.app.hd.digital/menus";
 
@@ -32,3 +29,6 @@ export const FACEBOOK_URL =
 export const INSTAGRAM_URL = process.env.INSTAGRAM_URL ?? "";
 
 export const TIKTOK_URL = process.env.TIKTOK_URL ?? "";
+
+/** Tableau Canva des suggestions du jour (mis à jour quotidiennement) */
+export const DAILY_SUGGESTIONS_URL = process.env.DAILY_SUGGESTIONS_URL ?? "";

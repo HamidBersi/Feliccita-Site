@@ -30,7 +30,7 @@
   "Hero": {
     "title": "Italian restaurant & pizzeria",
     "titleLocation": "Furdenheim",
-    "subtitle": "72h fermentation, traditional biga and selected Italian products — over 8 years of passion in Furdenheim.",
+    "subtitle": "Artisan pizzas, fresh pasta and Italian specialities to enjoy dine in, on the terrace or takeaway.",
     "order": "Order online",
     "reserve": "Book a table",
     "imageAlt": "La Félicità restaurant interior"
@@ -99,21 +99,22 @@
     "subtitle": "Artisan pizzas, fresh pasta, antipasti and Italian specialities — filter by category to browse our menu.",
     "back": "Back to home",
     "filterAll": "All",
+    "badgeSignature": "Signature",
+    "badgePopular": "Popular",
+    "emptyCategory": "No dishes in this category at the moment.",
     "ctaTitle": "Ready to order?",
-    "ctaSubtitle": "Order online or view the full PDF menu.",
+    "ctaSubtitle": "Order online in just a few clicks.",
     "orderCta": "Order online",
     "pdfCta": "PDF menu",
     "categories": {
       "entrees": "Starters",
-      "nos-pizzas": "Pizzas",
-      "nos-pizzas-speciales": "Special pizzas",
-      "nos-pates": "Pasta",
-      "nos-viandes": "Meat",
-      "nos-salades": "Salads",
-      "nos-boissons-sans-alcool": "Drinks",
-      "nos-vins-rouges": "Red wines",
-      "nos-vins-blancs": "White wines",
-      "nos-vins-roses": "Rosé wines"
+      "salades": "Salads",
+      "viandes": "Meat",
+      "pates": "Pasta",
+      "pizzas": "Pizzas",
+      "desserts": "Desserts",
+      "boissons": "Drinks",
+      "vins": "Wines"
     }
   },
   "About": {
@@ -127,21 +128,24 @@
     "title": "Discover La Félicità",
     "close": "Close",
     "pizza": {
-      "title": "Homemade pizzas",
-      "text": "72h biga-raised dough, selected Italian products and oven baking for authentic pizzas.",
+      "title": "Artisan pizzas",
+      "text": "Made with traditional biga and matured 72 hours, our light pizzas celebrate the full authenticity of Italy.",
+      "textFull": "Prepared with a traditional biga and matured for 72 hours, our pizzas develop a light, flavourful dough that is easy to digest. Topped with carefully selected Italian products, they celebrate the full authenticity of Italian cuisine.",
       "link": "Learn more",
       "imageAlt": "Pizza baked in a wood-fired oven"
     },
     "pasta": {
-      "title": "Pasta & Italian dishes",
-      "text": "Linguini, rigatoni, ravioli and house specialities prepared with fresh products and a touch of Italian tradition.",
+      "title": "Pasta & Italian specialities",
+      "text": "From ravioli to linguini, our recipes are crafted with fresh ingredients and particular care for Italian flavours.",
+      "textFull": "From ravioli to linguini, our recipes are crafted with fresh ingredients and particular attention to flavour. A generous cuisine inspired by Italian traditions and prepared with passion.",
       "link": "Learn more",
       "imageAlt": "Italian pasta dishes"
     },
     "daily": {
       "title": "Suggestions & daily specials",
-      "text": "Creations that change with fresh arrivals and the chef's inspiration — come and discover what's new today.",
-      "link": "Learn more",
+      "text": "With the seasons and fresh arrivals, our kitchen keeps renewing — let yourself be surprised by our latest creations.",
+      "textFull": "With the rhythm of the seasons and fresh arrivals, our kitchen renews itself regularly to help you discover new flavours. Let yourself be surprised by the inspirations of the moment and our team's creations.",
+      "link": "View today's suggestions",
       "imageAlt": "Daily specials and chef's suggestions at La Félicità"
     },
     "terrace": {

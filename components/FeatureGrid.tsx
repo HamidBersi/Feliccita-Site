@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useEffect, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
-import { ORDER_URL } from "@/lib/constants";
+import { DAILY_SUGGESTIONS_URL, ORDER_URL } from "@/lib/constants";
 import { GALLERY_IMAGES } from "@/lib/gallery-images";
 
 type CardConfig = {
@@ -15,6 +15,7 @@ type CardConfig = {
   icon: ReactNode;
   titleKey: string;
   textKey: string;
+  textFullKey?: string;
   linkKey?: string;
   href?: string;
 };
@@ -146,31 +147,50 @@ function GallerySlider({
 
   return (
     <div
-      className="relative z-10 w-full max-w-4xl overflow-hidden rounded-2xl bg-white shadow-[0_24px_80px_rgba(0,0,0,0.35)]"
+      className="fixed inset-0 z-10 flex flex-col bg-black"
       onClick={(event) => event.stopPropagation()}
     >
-      <div className="border-b border-black/8 px-6 py-5 sm:px-8">
-        <h3 className="font-serif text-2xl text-ink sm:text-3xl">{t("gallery.title")}</h3>
-        <p className="mt-2 text-sm text-muted">{t("gallery.text")}</p>
+      <div className="flex shrink-0 items-center justify-between gap-4 px-4 py-3 supports-[padding:max(0px)]:pt-[max(0.75rem,env(safe-area-inset-top))] sm:px-6 sm:py-4">
+        <div className="min-w-0">
+          <h3 className="truncate font-serif text-lg text-white sm:text-2xl">
+            {t("gallery.title")}
+          </h3>
+          <p className="mt-0.5 text-xs text-white/55 sm:text-sm">
+            {t("gallery.counter", { current: slideIndex + 1, total: GALLERY_IMAGES.length })}
+          </p>
+        </div>
+        <button
+          type="button"
+          onClick={onClose}
+          className="flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
+          aria-label={t("close")}
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path
+              d="M6 6l12 12M18 6L6 18"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+          </svg>
+        </button>
       </div>
 
-      <div className="relative bg-cream">
-        <div className="relative aspect-[4/3] min-h-[240px] sm:aspect-[16/10] sm:min-h-[320px]">
-          <Image
-            key={currentSrc}
-            src={currentSrc}
-            alt={t("gallery.photoAlt", { number: slideIndex + 1 })}
-            fill
-            className="object-contain p-1 sm:p-2"
-            sizes="(max-width: 768px) 100vw, 896px"
-            priority
-          />
-        </div>
+      <div className="relative min-h-0 flex-1">
+        <Image
+          key={currentSrc}
+          src={currentSrc}
+          alt={t("gallery.photoAlt", { number: slideIndex + 1 })}
+          fill
+          className="object-contain"
+          sizes="100vw"
+          priority
+        />
 
         <button
           type="button"
           onClick={onPrev}
-          className="absolute left-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-ink shadow-lg transition-colors hover:bg-white sm:left-4 sm:h-11 sm:w-11"
+          className="absolute left-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-sm transition-colors hover:bg-black/70 sm:left-5 sm:h-12 sm:w-12"
           aria-label={t("gallery.prev")}
         >
           <ChevronLeft />
@@ -179,25 +199,21 @@ function GallerySlider({
         <button
           type="button"
           onClick={onNext}
-          className="absolute right-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-ink shadow-lg transition-colors hover:bg-white sm:right-4 sm:h-11 sm:w-11"
+          className="absolute right-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-sm transition-colors hover:bg-black/70 sm:right-5 sm:h-12 sm:w-12"
           aria-label={t("gallery.next")}
         >
           <ChevronRight />
         </button>
-
-        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 rounded-full bg-black/50 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm">
-          {t("gallery.counter", { current: slideIndex + 1, total: GALLERY_IMAGES.length })}
-        </div>
       </div>
 
-      <div className="flex items-center justify-center gap-2 px-6 py-4">
+      <div className="flex shrink-0 items-center justify-center gap-2 px-4 py-4 supports-[padding:max(0px)]:pb-[max(1rem,env(safe-area-inset-bottom))] sm:py-5">
         {GALLERY_IMAGES.map((src, index) => (
           <button
             key={src}
             type="button"
             onClick={() => onGoTo(index)}
             className={`h-2 rounded-full transition-all ${
-              index === slideIndex ? "w-6 bg-gold" : "w-2 bg-black/20 hover:bg-gold/50"
+              index === slideIndex ? "w-6 bg-gold" : "w-2 bg-white/35 hover:bg-white/60"
             }`}
             aria-label={t("gallery.goTo", { number: index + 1 })}
           />
@@ -260,6 +276,7 @@ export default function FeatureGridClient() {
       icon: <PizzaIcon />,
       titleKey: "pizza.title",
       textKey: "pizza.text",
+      textFullKey: "pizza.textFull",
       linkKey: "pizza.link",
     },
     {
@@ -270,16 +287,20 @@ export default function FeatureGridClient() {
       icon: <PastaIcon />,
       titleKey: "pasta.title",
       textKey: "pasta.text",
+      textFullKey: "pasta.textFull",
       linkKey: "pasta.link",
     },
     {
       id: "daily",
-      type: "expand",
+      type: DAILY_SUGGESTIONS_URL ? "link" : "expand",
       image: "/images/Suggestion_Grille3.png",
       imageAltKey: "daily.imageAlt",
       icon: <DailyIcon />,
       titleKey: "daily.title",
       textKey: "daily.text",
+      ...(DAILY_SUGGESTIONS_URL
+        ? { href: DAILY_SUGGESTIONS_URL }
+        : { textFullKey: "daily.textFull" }),
       linkKey: "daily.link",
     },
     {
@@ -317,53 +338,60 @@ export default function FeatureGridClient() {
 
   const expandedCard = cards.find((card) => card.id === expandedId);
 
-  const overlay =
-    mounted && (expandedCard || galleryOpen)
+  const cardOverlay =
+    mounted && expandedCard
       ? createPortal(
           <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6">
             <button
               type="button"
               className="absolute inset-0 bg-ink/65 backdrop-blur-sm"
               aria-label={t("close")}
-              onClick={() => {
-                setExpandedId(null);
-                closeGallery();
-              }}
+              onClick={() => setExpandedId(null)}
             />
 
-            {expandedCard ? (
-              <div className="relative z-10 w-full max-w-2xl overflow-hidden rounded-2xl bg-white shadow-[0_24px_80px_rgba(0,0,0,0.35)]">
-                {expandedCard.image ? (
-                  <div className="relative aspect-[16/10]">
-                    <Image
-                      src={expandedCard.image}
-                      alt={t(expandedCard.imageAltKey)}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, 672px"
-                    />
-                  </div>
-                ) : null}
-                <div className="p-6 sm:p-8">
-                  <h3 className="font-serif text-2xl text-ink sm:text-3xl">
-                    {t(expandedCard.titleKey)}
-                  </h3>
-                  <p className="mt-4 text-base leading-relaxed text-muted">
-                    {t(expandedCard.textKey)}
-                  </p>
+            <div className="relative z-10 w-full max-w-2xl overflow-hidden rounded-2xl bg-white shadow-[0_24px_80px_rgba(0,0,0,0.35)]">
+              {expandedCard.image ? (
+                <div className="relative aspect-[16/10]">
+                  <Image
+                    src={expandedCard.image}
+                    alt={t(expandedCard.imageAltKey)}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 672px"
+                  />
                 </div>
+              ) : null}
+              <div className="p-6 sm:p-8">
+                <h3 className="font-serif text-2xl text-ink sm:text-3xl">
+                  {t(expandedCard.titleKey)}
+                </h3>
+                <p className="mt-4 text-base leading-relaxed text-muted">
+                  {t(expandedCard.textFullKey ?? expandedCard.textKey)}
+                </p>
               </div>
-            ) : null}
+            </div>
+          </div>,
+          document.body,
+        )
+      : null;
 
-            {galleryOpen ? (
-              <GallerySlider
-                slideIndex={gallerySlide}
-                onPrev={goToPrevSlide}
-                onNext={goToNextSlide}
-                onGoTo={setGallerySlide}
-                onClose={closeGallery}
-              />
-            ) : null}
+  const galleryOverlay =
+    mounted && galleryOpen
+      ? createPortal(
+          <div className="fixed inset-0 z-[9999]">
+            <button
+              type="button"
+              className="absolute inset-0 bg-black"
+              aria-label={t("close")}
+              onClick={closeGallery}
+            />
+            <GallerySlider
+              slideIndex={gallerySlide}
+              onPrev={goToPrevSlide}
+              onNext={goToNextSlide}
+              onGoTo={setGallerySlide}
+              onClose={closeGallery}
+            />
           </div>,
           document.body,
         )
@@ -484,7 +512,8 @@ export default function FeatureGridClient() {
           </div>
         </div>
       </section>
-      {overlay}
+      {cardOverlay}
+      {galleryOverlay}
     </>
   );
 }
