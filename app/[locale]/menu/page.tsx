@@ -64,7 +64,7 @@ export default async function MenuPage({ params }: Props) {
           </div>
         </section>
 
-        <section className="bg-cream px-5 py-12 sm:px-8 lg:px-10 lg:py-14">
+        <section className="overflow-x-hidden bg-cream px-5 py-12 sm:px-8 lg:px-10 lg:py-14">
           <RestaurantMenu menuItems={menuItems} locale={locale} />
         </section>
       </main>

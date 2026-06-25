@@ -19,39 +19,17 @@ type RestaurantMenuProps = {
 
 type FilterId = MenuCategoryId | "all";
 
-function MenuItemCard({
-  item,
-  locale,
-  badgeSignature,
-  badgePopular,
-}: {
-  item: MenuItem;
-  locale: string;
-  badgeSignature: string;
-  badgePopular: string;
-}) {
+function MenuItemCard({ item, locale }: { item: MenuItem; locale: string }) {
   return (
     <article className="group rounded-2xl border border-black/8 bg-white px-4 py-4 shadow-[0_2px_16px_rgba(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-0.5 hover:border-gold/35 hover:shadow-[0_12px_32px_rgba(196,154,42,0.1)] sm:px-5 sm:py-5">
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0 flex-1">
-          <div className="flex flex-wrap items-center gap-2">
-            <h3 className="font-medium leading-snug text-ink">{item.name}</h3>
-            {item.badge === "signature" ? (
-              <span className="shrink-0 rounded-full bg-dark px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-gold">
-                {badgeSignature}
-              </span>
-            ) : null}
-            {item.badge === "popular" ? (
-              <span className="shrink-0 rounded-full bg-gold-bg px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-gold">
-                {badgePopular}
-              </span>
-            ) : null}
-          </div>
+          <h3 className="font-medium leading-snug text-ink">{item.name}</h3>
           {item.description ? (
             <p className="mt-1.5 text-sm leading-relaxed text-muted">{item.description}</p>
           ) : null}
         </div>
-        <span className="shrink-0 font-serif text-base font-medium text-gold sm:text-lg">
+        <span className="shrink-0 font-sans text-base font-semibold tabular-nums text-ink sm:text-lg">
           {formatMenuPrice(item.price, locale)}
         </span>
       </div>
@@ -90,26 +68,23 @@ export default function RestaurantMenu({ menuItems, locale }: RestaurantMenuProp
     })),
   ];
 
-  const badgeSignature = t("badgeSignature");
-  const badgePopular = t("badgePopular");
-
   return (
-    <div className="mx-auto max-w-4xl">
-      <div className="sticky top-[68px] z-20 -mx-5 bg-cream/95 px-5 py-3 backdrop-blur-md supports-[backdrop-filter]:bg-cream/85 sm:-mx-8 sm:px-8 lg:-mx-10 lg:px-10">
-        <div className="flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+    <div className="mx-auto min-w-0 max-w-4xl">
+      <div className="sticky top-[68px] z-20 -mt-1 w-full min-w-0 bg-cream/95 py-2 backdrop-blur-md supports-[backdrop-filter]:bg-cream/85">
+        <div className="flex min-w-0 gap-1.5 overflow-x-auto pb-0.5 [-ms-overflow-style:none] [scrollbar-width:none] sm:flex-wrap sm:overflow-visible sm:pb-0 [&::-webkit-scrollbar]:hidden">
           {filters.map((filter) => (
             <button
               key={filter.id}
               type="button"
               onClick={() => setSelectedCategory(filter.id)}
-              className={`shrink-0 rounded-full px-4 py-2 text-sm font-medium whitespace-nowrap transition-all duration-300 ${
+              className={`shrink-0 rounded-full px-3 py-1.5 text-xs font-medium whitespace-nowrap transition-all duration-300 sm:text-sm ${
                 selectedCategory === filter.id
-                  ? "bg-gold text-white shadow-[0_4px_16px_rgba(196,154,42,0.35)]"
+                  ? "bg-gold text-white shadow-[0_2px_10px_rgba(196,154,42,0.3)]"
                   : "border border-black/10 bg-white text-ink hover:border-gold/40 hover:bg-gold-bg/40"
               }`}
             >
               {filter.label}
-              <span className="ml-1.5 opacity-75">({filter.count})</span>
+              <span className="ml-1 opacity-70">({filter.count})</span>
             </button>
           ))}
         </div>
@@ -126,13 +101,7 @@ export default function RestaurantMenu({ menuItems, locale }: RestaurantMenuProp
 
             <div className="space-y-3 sm:space-y-4">
               {group.items.map((item) => (
-                <MenuItemCard
-                  key={item.id}
-                  item={item}
-                  locale={locale}
-                  badgeSignature={badgeSignature}
-                  badgePopular={badgePopular}
-                />
+                <MenuItemCard key={item.id} item={item} locale={locale} />
               ))}
             </div>
           </section>
