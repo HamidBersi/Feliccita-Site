@@ -128,7 +128,7 @@ export const MENU_ITEMS: MenuItem[] = [
     id: "viande-faux-filet-beurre",
     name: "Faux filet de bœuf grillé — beurre maître d'hôtel",
     category: "viandes",
-    description: "Accompagnée d'une petite sauce tomate onctueuse et savoureuse",
+    description: "",
     price: 23.5,
     badge: "signature",
   },
@@ -141,9 +141,9 @@ export const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: "viande-milanaise-boeuf",
-    name: "Milanaise de bœuf",
+    name: "Milanaise de bœuf — fromage Taleggio et jambon St-Daniel gratinée au four",
     category: "viandes",
-    description: "",
+    description: "Accompagnée d'une petite sauce tomate onctueuse et savoureuse",
     price: 26.5,
   },
   {
