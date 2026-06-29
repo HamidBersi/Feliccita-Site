@@ -1,16 +1,15 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import {
-  countItemsByCategory,
   filterMenuItems,
   formatMenuPrice,
   MENU_CATEGORY_ORDER,
   type MenuCategoryId,
   type MenuItem,
 } from "@/lib/menu";
-import { ORDER_URL } from "@/lib/constants";
+import MenuPageCta from "@/components/MenuPageCta";
 
 type RestaurantMenuProps = {
   menuItems: MenuItem[];
@@ -40,8 +39,39 @@ function MenuItemCard({ item, locale }: { item: MenuItem; locale: string }) {
 export default function RestaurantMenu({ menuItems, locale }: RestaurantMenuProps) {
   const t = useTranslations("MenuPage");
   const [selectedCategory, setSelectedCategory] = useState<FilterId>("all");
+  const filtersRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
 
-  const counts = useMemo(() => countItemsByCategory(menuItems), [menuItems]);
+  const NAVBAR_HEIGHT = 68;
+
+  function getStickyOffset() {
+    const filtersHeight = filtersRef.current?.offsetHeight ?? 44;
+    return NAVBAR_HEIGHT + filtersHeight + 16;
+  }
+
+  function handleCategoryChange(category: FilterId) {
+    setSelectedCategory(category);
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const list = listRef.current;
+        if (!list) {
+          return;
+        }
+
+        const top = list.getBoundingClientRect().top + window.scrollY - getStickyOffset();
+        window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+      });
+    });
+  }
+
+  const filters: { id: FilterId; label: string }[] = [
+    { id: "all", label: t("filterAll") },
+    ...MENU_CATEGORY_ORDER.map((id) => ({
+      id,
+      label: t(`categories.${id}`),
+    })),
+  ];
 
   const filteredItems = useMemo(
     () => filterMenuItems(menuItems, selectedCategory),
@@ -59,24 +89,18 @@ export default function RestaurantMenu({ menuItems, locale }: RestaurantMenuProp
     })).filter((group) => group.items.length > 0);
   }, [filteredItems, menuItems, selectedCategory]);
 
-  const filters: { id: FilterId; label: string; count: number }[] = [
-    { id: "all", label: t("filterAll"), count: counts.all },
-    ...MENU_CATEGORY_ORDER.map((id) => ({
-      id,
-      label: t(`categories.${id}`),
-      count: counts[id],
-    })),
-  ];
-
   return (
-    <div className="mx-auto min-w-0 max-w-4xl">
-      <div className="sticky top-[68px] z-20 -mt-1 w-full min-w-0 bg-cream/95 py-2 backdrop-blur-md supports-[backdrop-filter]:bg-cream/85">
-        <div className="flex min-w-0 gap-1.5 overflow-x-auto pb-0.5 [-ms-overflow-style:none] [scrollbar-width:none] sm:flex-wrap sm:overflow-visible sm:pb-0 [&::-webkit-scrollbar]:hidden">
+    <div className="pb-[calc(5.5rem+env(safe-area-inset-bottom,0px))]">
+      <div
+        ref={filtersRef}
+        className="sticky top-[68px] z-30 w-full border-b border-black/8 bg-cream py-3 shadow-[0_4px_24px_rgba(0,0,0,0.08)]"
+      >
+        <div className="mx-auto flex max-w-4xl flex-nowrap gap-1.5 overflow-x-auto px-5 pb-0.5 [-ms-overflow-style:none] [scrollbar-width:none] sm:px-8 lg:px-10 [&::-webkit-scrollbar]:hidden">
           {filters.map((filter) => (
             <button
               key={filter.id}
               type="button"
-              onClick={() => setSelectedCategory(filter.id)}
+              onClick={() => handleCategoryChange(filter.id)}
               className={`shrink-0 rounded-full px-3 py-1.5 text-xs font-medium whitespace-nowrap transition-all duration-300 sm:text-sm ${
                 selectedCategory === filter.id
                   ? "bg-gold text-white shadow-[0_2px_10px_rgba(196,154,42,0.3)]"
@@ -84,20 +108,21 @@ export default function RestaurantMenu({ menuItems, locale }: RestaurantMenuProp
               }`}
             >
               {filter.label}
-              <span className="ml-1 opacity-70">({filter.count})</span>
             </button>
           ))}
         </div>
       </div>
 
-      <div className="mt-8 space-y-10 sm:mt-10 sm:space-y-12">
+      <div className="relative z-10 mx-auto min-w-0 max-w-4xl px-5 sm:px-8 lg:px-10">
+        <div
+          ref={listRef}
+          className="scroll-mt-[calc(68px+3.75rem)] space-y-10 pt-6 sm:space-y-12 sm:pt-8"
+        >
         {groupedItems.map((group) => (
           <section key={group.category}>
-            {selectedCategory === "all" ? (
-              <h2 className="mb-4 font-serif text-2xl text-ink sm:mb-5 sm:text-3xl">
-                {t(`categories.${group.category}`)}
-              </h2>
-            ) : null}
+            <h2 className="mb-4 font-serif text-2xl text-ink sm:mb-5 sm:text-3xl">
+              {t(`categories.${group.category}`)}
+            </h2>
 
             <div className="space-y-3 sm:space-y-4">
               {group.items.map((item) => (
@@ -106,28 +131,14 @@ export default function RestaurantMenu({ menuItems, locale }: RestaurantMenuProp
             </div>
           </section>
         ))}
+        </div>
+
+        {filteredItems.length === 0 ? (
+          <p className="mt-12 text-center text-sm text-muted">{t("emptyCategory")}</p>
+        ) : null}
       </div>
 
-      {filteredItems.length === 0 ? (
-        <p className="mt-12 text-center text-sm text-muted">{t("emptyCategory")}</p>
-      ) : null}
-
-      <div className="mt-14 flex flex-col items-center gap-4 rounded-2xl border border-black/8 bg-white px-6 py-8 text-center shadow-[0_8px_32px_rgba(0,0,0,0.06)] sm:flex-row sm:justify-between sm:text-left">
-        <div>
-          <p className="font-serif text-xl text-ink">{t("ctaTitle")}</p>
-          <p className="mt-1 text-sm text-muted">{t("ctaSubtitle")}</p>
-        </div>
-        <div className="flex w-full flex-col gap-3 sm:w-auto">
-          <a
-            href={ORDER_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center rounded-xl bg-gold px-6 py-3 text-sm font-medium text-white transition-all hover:-translate-y-0.5 hover:bg-[#d4aa35]"
-          >
-            {t("orderCta")}
-          </a>
-        </div>
-      </div>
+      <MenuPageCta />
     </div>
   );
 }

@@ -26,7 +26,8 @@ export const GOOGLE_MAPS_REVIEWS_URL =
 export const FACEBOOK_URL =
   "https://www.facebook.com/Restaurant-F%C3%A9licit%C3%A0-%C3%A0-Furdenheim-174827229850250/";
 
-export const INSTAGRAM_URL = process.env.INSTAGRAM_URL ?? "";
+export const INSTAGRAM_URL =
+  process.env.INSTAGRAM_URL ?? "https://www.instagram.com/felicita_furdenheim/";
 
 export const TIKTOK_URL = process.env.TIKTOK_URL ?? "";
 
