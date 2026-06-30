@@ -17,6 +17,9 @@ export function getReservationUrl(locale: string): string {
   return `https://reservation.dish.co/widget/${RESERVATION_WIDGET_ID}?lang=${lang}`;
 }
 
+/** Chemin interne pour Google Business et les liens « Réserver une table ». */
+export const RESERVATION_PAGE_PATH = "/reserver" as const;
+
 export const GOOGLE_MAPS_PLACE_URL =
   "https://www.google.com/maps/place/La+Felicita/@48.6113991,7.5512431,17z/data=!3m1!4b1!4m6!3m5!1s0x4796b1509c1f4131:0x2bea8a64107ff1e2!8m2!3d48.6113991!4d7.553818!16s%2Fg%2F11g0zry3bj?entry=ttu";
 

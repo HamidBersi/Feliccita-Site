@@ -91,6 +91,14 @@
     "close": "Schließen",
     "iframeTitle": "Reservierungsformular La Félicità"
   },
+  "ReservationPage": {
+    "metaTitle": "Reservierung — La Félicità",
+    "metaDescription": "Reservieren Sie Ihren Tisch bei La Félicità in Furdenheim: online oder telefonisch.",
+    "eyebrow": "Reservierung",
+    "title": "Tisch reservieren",
+    "subtitle": "Wählen Sie die Online-Reservierung oder rufen Sie uns direkt an — wir freuen uns auf Ihren Besuch.",
+    "back": "Zurück zur Startseite"
+  },
   "MenuPage": {
     "metaTitle": "Menü — La Félicità",
     "metaDescription": "Entdecken Sie die Karte von La Félicità: Pizzen, Pasta, Salate, Weine und italienische Spezialitäten in Furdenheim.",
