@@ -171,7 +171,7 @@ export default function Navbar() {
       />
 
       <aside
-        className={`fixed right-0 top-0 z-[200] flex h-dvh w-[min(100vw-2.5rem,320px)] flex-col bg-white shadow-[-8px_0_40px_rgba(0,0,0,0.12)] transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] lg:hidden ${
+        className={`fixed right-0 top-0 z-[200] flex h-dvh min-h-0 w-[min(100vw-2.5rem,320px)] flex-col bg-white shadow-[-8px_0_40px_rgba(0,0,0,0.12)] transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] lg:hidden ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
         aria-hidden={!isOpen}
@@ -197,49 +197,51 @@ export default function Navbar() {
           </div>
         </div>
 
-        <nav className="flex-1 overflow-y-auto px-4 py-2" aria-label={t("mobileNav")}>
-          {NAV_ITEMS.map((item) => {
-            const active = isActive(item.href);
+        <div className="flex min-h-0 flex-1 flex-col overflow-y-auto overscroll-contain">
+          <nav className="px-4 py-2" aria-label={t("mobileNav")}>
+            {NAV_ITEMS.map((item) => {
+              const active = isActive(item.href);
 
-            return (
-              <Link
-                key={item.key}
-                href={item.href}
-                onClick={closeDrawer}
-                className={`group flex items-center justify-between rounded-lg px-3 py-3.5 transition-colors ${
-                  active ? "bg-gold-bg/60 text-gold" : "text-ink hover:bg-cream"
-                }`}
-              >
-                <span className={`text-[15px] font-medium ${active ? "font-semibold" : ""}`}>
-                  {t(`nav.${item.key}`)}
-                </span>
-                <span
-                  className={`transition-colors ${
-                    active ? "text-gold" : "text-muted/50 group-hover:text-gold"
+              return (
+                <Link
+                  key={item.key}
+                  href={item.href}
+                  onClick={closeDrawer}
+                  className={`group flex items-center justify-between rounded-lg px-3 py-3 transition-colors ${
+                    active ? "bg-gold-bg/60 text-gold" : "text-ink hover:bg-cream"
                   }`}
                 >
-                  <ChevronRight />
-                </span>
-              </Link>
-            );
-          })}
-        </nav>
+                  <span className={`text-[15px] font-medium ${active ? "font-semibold" : ""}`}>
+                    {t(`nav.${item.key}`)}
+                  </span>
+                  <span
+                    className={`transition-colors ${
+                      active ? "text-gold" : "text-muted/50 group-hover:text-gold"
+                    }`}
+                  >
+                    <ChevronRight />
+                  </span>
+                </Link>
+              );
+            })}
+          </nav>
 
-        <div className="border-t border-border bg-cream/30 px-6 py-5">
-          <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-muted">
-            {t("language")}
-          </p>
-          <LanguageSwitcher />
+          <div className="mt-auto border-t border-border bg-cream/30 px-6 py-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
+            <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-muted">
+              {t("language")}
+            </p>
+            <LanguageSwitcher variant="drawer" />
 
-          <a
-            href={ORDER_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={closeDrawer}
-            className="mt-5 flex w-full items-center justify-center rounded-md bg-gold px-5 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90"
-          >
-            {t("cta")}
-          </a>
+            <a
+              href={ORDER_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={closeDrawer}
+              className="mt-4 flex w-full items-center justify-center rounded-md bg-gold px-5 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90"
+            >
+              {t("cta")}
+            </a>
+          </div>
         </div>
       </aside>
     </>

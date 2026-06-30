@@ -76,13 +76,18 @@ function ChevronIcon({ open }: { open: boolean }) {
   );
 }
 
-export default function LanguageSwitcher() {
+type LanguageSwitcherProps = {
+  variant?: "dropdown" | "drawer";
+};
+
+export default function LanguageSwitcher({ variant = "dropdown" }: LanguageSwitcherProps) {
   const t = useTranslations("Navbar");
   const locale = useLocale() as Locale;
   const pathname = usePathname();
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const isDrawer = variant === "drawer";
 
   function switchLocale(nextLocale: Locale) {
     if (nextLocale === locale) {
@@ -116,16 +121,21 @@ export default function LanguageSwitcher() {
   }, []);
 
   return (
-    <div ref={containerRef} className="relative">
+    <div ref={containerRef} className={isDrawer ? "w-full" : "relative"}>
       <button
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
         aria-label={t("selectLanguage")}
         aria-haspopup="listbox"
         aria-expanded={isOpen}
-        className="flex h-10 cursor-pointer items-center gap-2 rounded-md border border-border bg-white px-3 transition-colors hover:border-gold/40"
+        className={`flex h-10 cursor-pointer items-center gap-2 rounded-md border border-border bg-white px-3 transition-colors hover:border-gold/40 ${
+          isDrawer ? "w-full justify-between" : ""
+        }`}
       >
-        <FlagIcon locale={locale} className="rounded-sm shadow-sm" />
+        <span className="flex items-center gap-2">
+          <FlagIcon locale={locale} className="rounded-sm shadow-sm" />
+          {isDrawer ? <span className="text-sm text-ink">{t(`languages.${locale}`)}</span> : null}
+        </span>
         <ChevronIcon open={isOpen} />
       </button>
 
@@ -133,7 +143,11 @@ export default function LanguageSwitcher() {
         <ul
           role="listbox"
           aria-label={t("language")}
-          className="absolute right-0 top-[calc(100%+6px)] z-[300] min-w-[160px] overflow-hidden rounded-md border border-border bg-white py-1 shadow-lg"
+          className={
+            isDrawer
+              ? "mt-2 overflow-hidden rounded-md border border-border bg-white py-1"
+              : "absolute right-0 top-[calc(100%+6px)] z-[300] min-w-[160px] overflow-hidden rounded-md border border-border bg-white py-1 shadow-lg"
+          }
         >
           {routing.locales.map((loc) => {
             const isActive = loc === locale;
