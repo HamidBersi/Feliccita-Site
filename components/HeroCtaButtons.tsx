@@ -43,16 +43,16 @@ function CalendarIcon({ size = 18 }: { size?: number }) {
 }
 
 const orderHeroClassName =
-  "group inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-md bg-gold px-7 py-2.5 text-xs font-medium text-white shadow-[0_4px_16px_rgba(196,154,42,0.3)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-[#d4aa35] hover:shadow-[0_12px_32px_rgba(196,154,42,0.5)] active:translate-y-0 md:w-auto md:px-9 md:py-2.5 md:text-sm lg:px-10 [&_svg]:transition-transform [&_svg]:duration-300 group-hover:[&_svg]:scale-110";
+  "group inline-flex w-full items-center justify-center gap-2.5 whitespace-nowrap rounded-lg bg-gold px-8 py-3.5 text-sm font-semibold text-white shadow-[0_4px_16px_rgba(196,154,42,0.3)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-[#d4aa35] hover:shadow-[0_12px_32px_rgba(196,154,42,0.5)] active:translate-y-0 sm:px-9 sm:py-4 sm:text-base md:w-auto lg:gap-3 lg:px-11 lg:py-4 lg:text-lg [&_svg]:transition-transform [&_svg]:duration-300 group-hover:[&_svg]:scale-110";
 
 const reserveHeroClassName =
-  "group inline-flex w-full cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-md border-[1.5px] border-white bg-white/5 px-7 py-2.5 text-xs font-medium text-white backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-gold hover:bg-white hover:text-ink hover:shadow-[0_12px_32px_rgba(255,255,255,0.18)] active:translate-y-0 md:w-auto md:px-9 md:py-2.5 md:text-sm lg:px-10 [&_svg]:transition-transform [&_svg]:duration-300 group-hover:[&_svg]:scale-110";
+  "group inline-flex w-full cursor-pointer items-center justify-center gap-2.5 whitespace-nowrap rounded-lg border-2 border-white bg-white/5 px-8 py-3.5 text-sm font-semibold text-white backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-gold hover:bg-white hover:text-ink hover:shadow-[0_12px_32px_rgba(255,255,255,0.18)] active:translate-y-0 sm:px-9 sm:py-4 sm:text-base md:w-auto lg:gap-3 lg:px-11 lg:py-4 lg:text-lg [&_svg]:transition-transform [&_svg]:duration-300 group-hover:[&_svg]:scale-110";
 
 const orderFloatingClassName =
-  "group inline-flex flex-1 items-center justify-center gap-1.5 whitespace-nowrap rounded-md bg-gold px-4 py-2.5 text-xs font-medium text-white shadow-[0_4px_16px_rgba(196,154,42,0.3)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-[#d4aa35] hover:shadow-[0_8px_24px_rgba(196,154,42,0.45)] active:translate-y-0 sm:flex-none sm:px-7 sm:text-sm [&_svg]:transition-transform [&_svg]:duration-300 group-hover:[&_svg]:scale-110";
+  "group inline-flex flex-1 items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-gold px-5 py-3.5 text-sm font-semibold text-white shadow-[0_4px_16px_rgba(196,154,42,0.3)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-[#d4aa35] hover:shadow-[0_8px_24px_rgba(196,154,42,0.45)] active:translate-y-0 sm:flex-none sm:px-8 sm:py-4 sm:text-base [&_svg]:transition-transform [&_svg]:duration-300 group-hover:[&_svg]:scale-110";
 
 const reserveFloatingClassName =
-  "group inline-flex flex-1 cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-md border border-ink/15 bg-cream/80 px-4 py-2.5 text-xs font-medium text-ink transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-gold hover:bg-gold-bg active:translate-y-0 sm:flex-none sm:px-7 sm:text-sm [&_svg]:transition-transform [&_svg]:duration-300 group-hover:[&_svg]:scale-110";
+  "group inline-flex flex-1 cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-ink/15 bg-cream/80 px-5 py-3.5 text-sm font-semibold text-ink transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-gold hover:bg-gold-bg active:translate-y-0 sm:flex-none sm:px-8 sm:py-4 sm:text-base [&_svg]:transition-transform [&_svg]:duration-300 group-hover:[&_svg]:scale-110";
 
 type HeroCtaButtonsProps = {
   order: string;
@@ -62,7 +62,7 @@ type HeroCtaButtonsProps = {
 
 export default function HeroCtaButtons({ order, reserve, variant }: HeroCtaButtonsProps) {
   const isHero = variant === "hero";
-  const iconSize = isHero ? 18 : 16;
+  const iconSize = isHero ? 22 : 20;
 
   const buttons = (
     <>
@@ -87,7 +87,7 @@ export default function HeroCtaButtons({ order, reserve, variant }: HeroCtaButto
 
   if (isHero) {
     return (
-      <div className="flex w-full max-w-xs flex-col gap-2.5 sm:max-w-sm md:max-w-none md:flex-row md:gap-4">
+      <div className="flex w-full max-w-sm flex-col gap-3 sm:max-w-md md:max-w-none md:flex-row md:gap-4 lg:gap-5">
         {buttons}
       </div>
     );

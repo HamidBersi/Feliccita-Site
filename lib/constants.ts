@@ -35,4 +35,6 @@ export const INSTAGRAM_URL =
 export const TIKTOK_URL = process.env.TIKTOK_URL ?? "";
 
 /** Tableau Canva des suggestions du jour (mis à jour quotidiennement) */
-export const DAILY_SUGGESTIONS_URL = process.env.DAILY_SUGGESTIONS_URL ?? "";
+export const DAILY_SUGGESTIONS_URL =
+  process.env.DAILY_SUGGESTIONS_URL ??
+  "https://www.canva.com/design/DAHHkcuJzsc/_GwRV_a14LDUIE-7rK-Dbw/edit";

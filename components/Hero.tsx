@@ -15,12 +15,12 @@ export default async function Hero() {
         priority
         fetchPriority="high"
         quality={80}
-        className="object-cover object-center brightness-105"
+        className="object-cover object-[center_30%] brightness-105 lg:object-[65%_center]"
         sizes="100vw"
       />
 
       <div
-        className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/20 lg:bg-gradient-to-r lg:from-black/80 lg:from-0% lg:via-black/45 lg:via-45% lg:to-transparent lg:to-80%"
+        className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/20 lg:bg-gradient-to-r lg:from-black/85 lg:from-0% lg:via-black/55 lg:via-50% lg:to-black/10 lg:to-100%"
         aria-hidden="true"
       />
 

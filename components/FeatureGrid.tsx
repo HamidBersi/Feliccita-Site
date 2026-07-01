@@ -9,7 +9,7 @@ import { GALLERY_IMAGES } from "@/lib/gallery-images";
 
 type CardConfig = {
   id: string;
-  type: "expand" | "link" | "gallery";
+  type: "expand" | "link" | "gallery" | "dual";
   image?: string;
   imageAltKey: string;
   icon: ReactNode;
@@ -17,6 +17,7 @@ type CardConfig = {
   textKey: string;
   textFullKey?: string;
   linkKey?: string;
+  learnMoreKey?: string;
   href?: string;
 };
 
@@ -292,16 +293,16 @@ export default function FeatureGridClient() {
     },
     {
       id: "daily",
-      type: DAILY_SUGGESTIONS_URL ? "link" : "expand",
+      type: "dual",
       image: "/images/Suggestion_Grille3.png",
       imageAltKey: "daily.imageAlt",
       icon: <DailyIcon />,
       titleKey: "daily.title",
       textKey: "daily.text",
-      ...(DAILY_SUGGESTIONS_URL
-        ? { href: DAILY_SUGGESTIONS_URL }
-        : { textFullKey: "daily.textFull" }),
+      textFullKey: "daily.textFull",
       linkKey: "daily.link",
+      learnMoreKey: "daily.learnMore",
+      href: DAILY_SUGGESTIONS_URL,
     },
     {
       id: "terrace",
@@ -368,6 +369,17 @@ export default function FeatureGridClient() {
                 <p className="mt-4 text-base leading-relaxed text-muted">
                   {t(expandedCard.textFullKey ?? expandedCard.textKey)}
                 </p>
+                {expandedCard.href && expandedCard.linkKey ? (
+                  <a
+                    href={expandedCard.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-6 inline-flex items-center justify-center gap-2 rounded-xl bg-gold px-6 py-3.5 text-sm font-medium text-white shadow-[0_4px_16px_rgba(196,154,42,0.3)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#d4aa35] hover:shadow-[0_8px_24px_rgba(196,154,42,0.45)] sm:text-base"
+                  >
+                    {t(expandedCard.linkKey)}
+                    <span aria-hidden="true">→</span>
+                  </a>
+                ) : null}
               </div>
             </div>
           </div>,
@@ -456,7 +468,7 @@ export default function FeatureGridClient() {
                       {t(card.textKey)}
                     </p>
 
-                    {card.linkKey ? (
+                    {card.linkKey && card.type !== "dual" ? (
                       <span className="mt-1.5 inline-flex items-center gap-1 text-[11px] font-medium text-gold sm:mt-2 sm:text-xs">
                         {t(card.linkKey)}
                         <span className="text-gold" aria-hidden="true">
@@ -495,6 +507,36 @@ export default function FeatureGridClient() {
                   >
                     {content}
                   </button>
+                );
+              }
+
+              if (card.type === "dual" && card.href) {
+                return (
+                  <div key={card.id} className={cardClassName}>
+                    {content}
+                    <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 px-3 pb-3 sm:px-3.5 sm:pb-3.5">
+                      {card.linkKey ? (
+                        <a
+                          href={card.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-[11px] font-medium text-gold transition-opacity hover:opacity-80 sm:text-xs"
+                        >
+                          {t(card.linkKey)}
+                          <span aria-hidden="true">→</span>
+                        </a>
+                      ) : null}
+                      {card.learnMoreKey ? (
+                        <button
+                          type="button"
+                          onClick={() => setExpandedId(card.id)}
+                          className="inline-flex cursor-pointer items-center gap-1 text-[11px] font-medium text-muted transition-colors hover:text-ink sm:text-xs"
+                        >
+                          {t(card.learnMoreKey)}
+                        </button>
+                      ) : null}
+                    </div>
+                  </div>
                 );
               }
 
