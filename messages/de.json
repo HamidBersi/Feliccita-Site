@@ -99,6 +99,16 @@
     "subtitle": "Wählen Sie die Online-Reservierung oder rufen Sie uns direkt an — wir freuen uns auf Ihren Besuch.",
     "back": "Zurück zur Startseite"
   },
+  "SuggestionsPage": {
+    "metaTitle": "Tagesvorschläge — La Félicità",
+    "metaDescription": "Entdecken Sie die Tagesvorschläge und Spezialitäten bei La Félicità in Furdenheim.",
+    "eyebrow": "Tageskarte",
+    "title": "Empfehlungen & Tagesgerichte",
+    "subtitle": "Unsere Auswahl des Moments, regelmäßig aktualisiert.",
+    "imageAlt": "Tafel mit Tagesvorschlägen bei La Félicità",
+    "zoomHint": "Auf dem Handy können Sie zum Zoomen die Gesten verwenden.",
+    "back": "Zurück zur Startseite"
+  },
   "MenuPage": {
     "metaTitle": "Menü — La Félicità",
     "metaDescription": "Entdecken Sie die Karte von La Félicità: Pizzen, Pasta, Salate, Weine und italienische Spezialitäten in Furdenheim.",
@@ -155,6 +165,11 @@
       "textFull": "Im Rhythmus der Jahreszeiten und frischer Lieferungen erneuert sich unsere Küche regelmäßig, um Ihnen neue Aromen zu entdecken. Lassen Sie sich von den Inspirationen des Moments und den Kreationen unseres Teams überraschen.",
       "link": "Tagesvorschläge ansehen",
       "learnMore": "Mehr erfahren",
+      "boardTitle": "Tagesvorschläge",
+      "boardHint": "Zum Vergrößern zoomen oder scrollen.",
+      "openOnCanva": "Auf Canva ansehen",
+      "openFullScreen": "Vollbild öffnen",
+      "embedUnavailable": "Die Tafel konnte nicht geladen werden. Nutzen Sie den Link unten, um sie auf Canva zu öffnen.",
       "imageAlt": "Tagesgerichte und Empfehlungen bei La Félicità"
     },
     "terrace": {

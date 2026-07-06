@@ -4,8 +4,9 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useEffect, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
-import { DAILY_SUGGESTIONS_URL, ORDER_URL } from "@/lib/constants";
+import { ORDER_URL, SUGGESTIONS_PAGE_PATH } from "@/lib/constants";
 import { GALLERY_IMAGES } from "@/lib/gallery-images";
+import { Link } from "@/i18n/navigation";
 
 type CardConfig = {
   id: string;
@@ -19,6 +20,7 @@ type CardConfig = {
   linkKey?: string;
   learnMoreKey?: string;
   href?: string;
+  internalLink?: string;
 };
 
 function PizzaIcon() {
@@ -302,7 +304,7 @@ export default function FeatureGridClient() {
       textFullKey: "daily.textFull",
       linkKey: "daily.link",
       learnMoreKey: "daily.learnMore",
-      href: DAILY_SUGGESTIONS_URL,
+      internalLink: SUGGESTIONS_PAGE_PATH,
     },
     {
       id: "terrace",
@@ -369,7 +371,15 @@ export default function FeatureGridClient() {
                 <p className="mt-4 text-base leading-relaxed text-muted">
                   {t(expandedCard.textFullKey ?? expandedCard.textKey)}
                 </p>
-                {expandedCard.href && expandedCard.linkKey ? (
+                {expandedCard.internalLink && expandedCard.linkKey ? (
+                  <Link
+                    href={expandedCard.internalLink}
+                    className="mt-6 inline-flex items-center justify-center gap-2 rounded-xl bg-gold px-6 py-3.5 text-sm font-medium text-white shadow-[0_4px_16px_rgba(196,154,42,0.3)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#d4aa35] hover:shadow-[0_8px_24px_rgba(196,154,42,0.45)] sm:text-base"
+                  >
+                    {t(expandedCard.linkKey)}
+                    <span aria-hidden="true">→</span>
+                  </Link>
+                ) : expandedCard.href && expandedCard.linkKey ? (
                   <a
                     href={expandedCard.href}
                     target="_blank"
@@ -510,12 +520,20 @@ export default function FeatureGridClient() {
                 );
               }
 
-              if (card.type === "dual" && card.href) {
+              if (card.type === "dual") {
                 return (
                   <div key={card.id} className={cardClassName}>
                     {content}
                     <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 px-3 pb-3 sm:px-3.5 sm:pb-3.5">
-                      {card.linkKey ? (
+                      {card.linkKey && card.internalLink ? (
+                        <Link
+                          href={card.internalLink}
+                          className="inline-flex items-center gap-1 text-[11px] font-medium text-gold transition-opacity hover:opacity-80 sm:text-xs"
+                        >
+                          {t(card.linkKey)}
+                          <span aria-hidden="true">→</span>
+                        </Link>
+                      ) : card.linkKey && card.href ? (
                         <a
                           href={card.href}
                           target="_blank"

@@ -99,6 +99,16 @@
     "subtitle": "Choose online booking or call us directly — we look forward to welcoming you.",
     "back": "Back to home"
   },
+  "SuggestionsPage": {
+    "metaTitle": "Today's suggestions — La Félicità",
+    "metaDescription": "Discover today's specials and chef's suggestions at La Félicità in Furdenheim.",
+    "eyebrow": "Daily menu",
+    "title": "Suggestions & daily specials",
+    "subtitle": "Our selection of the moment, updated regularly.",
+    "imageAlt": "La Félicità daily specials board",
+    "zoomHint": "Pinch the image to zoom on mobile.",
+    "back": "Back to home"
+  },
   "MenuPage": {
     "metaTitle": "Menu — La Félicità",
     "metaDescription": "Explore La Félicità menu: pizzas, pasta, salads, wines and Italian specialities in Furdenheim.",
@@ -155,6 +165,11 @@
       "textFull": "With the rhythm of the seasons and fresh arrivals, our kitchen renews itself regularly to help you discover new flavours. Let yourself be surprised by the inspirations of the moment and our team's creations.",
       "link": "View today's suggestions",
       "learnMore": "Learn more",
+      "boardTitle": "Today's suggestions",
+      "boardHint": "Pinch or scroll to zoom the image.",
+      "openOnCanva": "View on Canva",
+      "openFullScreen": "Open full screen",
+      "embedUnavailable": "The board could not be loaded. Use the link below to open it on Canva.",
       "imageAlt": "Daily specials and chef's suggestions at La Félicità"
     },
     "terrace": {

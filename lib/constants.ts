@@ -34,7 +34,12 @@ export const INSTAGRAM_URL =
 
 export const TIKTOK_URL = process.env.TIKTOK_URL ?? "";
 
-/** Tableau Canva des suggestions du jour (mis à jour quotidiennement) */
-export const DAILY_SUGGESTIONS_URL =
-  process.env.DAILY_SUGGESTIONS_URL ??
-  "https://www.canva.com/design/DAHHkcuJzsc/_GwRV_a14LDUIE-7rK-Dbw/edit";
+/** Page publique du tableau des suggestions (image figée, pas le Canva en direct). */
+export const SUGGESTIONS_PAGE_PATH = "/suggestions" as const;
+
+/**
+ * Image du tableau affiché aux clients.
+ * Workflow : modifier librement dans Canva, puis exporter en PNG et remplacer ce fichier.
+ */
+export const DAILY_SUGGESTIONS_IMAGE =
+  process.env.DAILY_SUGGESTIONS_IMAGE?.trim() || "/images/suggestions-du-jour.png";
