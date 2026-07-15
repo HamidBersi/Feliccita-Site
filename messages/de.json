@@ -99,6 +99,18 @@
     "subtitle": "Wählen Sie die Online-Reservierung oder rufen Sie uns direkt an — wir freuen uns auf Ihren Besuch.",
     "back": "Zurück zur Startseite"
   },
+  "ConditionsPage": {
+    "metaTitle": "Reservierungsbedingungen — La Félicità",
+    "metaDescription": "Lesen Sie die AGB und Datenschutzrichtlinie für die Online-Reservierung bei La Félicità.",
+    "eyebrow": "Rechtliche Hinweise",
+    "title": "Reservierungsbedingungen",
+    "intro": "Die untenstehenden Dokumente beschreiben die Bedingungen für Online-Tischreservierungen.",
+    "summary": "Mit der Reservierung akzeptieren Sie die allgemeinen Nutzungsbedingungen und bestätigen die Datenschutzrichtlinie des Reservierungsservice.",
+    "cguLink": "Allgemeine Geschäftsbedingungen (PDF)",
+    "privacyLink": "Datenschutzrichtlinie (PDF)",
+    "bloctel": "Gemäß den Artikeln L.223-1 ff. des französischen Verbraucherschutzgesetzes können Sie sich jederzeit kostenlos auf www.bloctel.gouv.fr gegen Telefonwerbung registrieren.",
+    "back": "Zurück zur Reservierung"
+  },
   "SuggestionsPage": {
     "metaTitle": "Tagesvorschläge — La Félicità",
     "metaDescription": "Entdecken Sie die Tagesvorschläge und Spezialitäten bei La Félicità in Furdenheim.",

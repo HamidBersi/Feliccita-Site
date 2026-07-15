@@ -40,7 +40,12 @@ async function fetchGooglePlace(): Promise<GooglePlaceData> {
     );
 
     if (!response.ok) {
-      console.error("Google Places API error:", response.status);
+      const errorBody = await response.text().catch(() => "");
+      console.error(
+        "Google Places API error:",
+        response.status,
+        errorBody.slice(0, 400),
+      );
       return fallback;
     }
 
@@ -67,7 +72,7 @@ async function fetchGooglePlace(): Promise<GooglePlaceData> {
 
 export const getGooglePlaceData = unstable_cache(
   fetchGooglePlace,
-  ["google-place-data"],
+  ["google-place-data-v2"],
   { revalidate: 3600 },
 );
 

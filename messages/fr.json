@@ -99,6 +99,18 @@
     "subtitle": "Choisissez la réservation en ligne ou appelez-nous directement — nous avons hâte de vous accueillir.",
     "back": "Retour à l'accueil"
   },
+  "ConditionsPage": {
+    "metaTitle": "Conditions de réservation — La Félicità",
+    "metaDescription": "Consultez les conditions générales et la politique de confidentialité pour la réservation en ligne à La Félicità.",
+    "eyebrow": "Informations légales",
+    "title": "Conditions de réservation",
+    "intro": "Les documents ci-dessous détaillent les conditions applicables à la réservation en ligne.",
+    "summary": "En réservant une table, vous acceptez les conditions générales d'utilisation et reconnaissez la politique de confidentialité du service de réservation.",
+    "cguLink": "Conditions générales d'utilisation (PDF)",
+    "privacyLink": "Politique de confidentialité (PDF)",
+    "bloctel": "Conformément aux articles L.223-1 et suivants du Code de la consommation, vous pouvez vous opposer à tout moment au démarchage téléphonique en vous inscrivant gratuitement sur www.bloctel.gouv.fr.",
+    "back": "Retour à la réservation"
+  },
   "SuggestionsPage": {
     "metaTitle": "Suggestions du jour — La Félicità",
     "metaDescription": "Découvrez les suggestions et plats du jour de La Félicità à Furdenheim.",

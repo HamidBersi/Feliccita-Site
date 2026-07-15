@@ -4,13 +4,12 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useEffect, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
-import { ORDER_URL, SUGGESTIONS_PAGE_PATH } from "@/lib/constants";
+import { ORDER_URL } from "@/lib/constants";
 import { GALLERY_IMAGES } from "@/lib/gallery-images";
-import { Link } from "@/i18n/navigation";
 
 type CardConfig = {
   id: string;
-  type: "expand" | "link" | "gallery" | "dual";
+  type: "expand" | "link" | "gallery";
   image?: string;
   imageAltKey: string;
   icon: ReactNode;
@@ -18,9 +17,7 @@ type CardConfig = {
   textKey: string;
   textFullKey?: string;
   linkKey?: string;
-  learnMoreKey?: string;
   href?: string;
-  internalLink?: string;
 };
 
 function PizzaIcon() {
@@ -70,21 +67,6 @@ function BagIcon() {
       <path d="M6 11v8.5A1.5 1.5 0 0 0 7.5 21h9a1.5 1.5 0 0 0 1.5-1.5V11" stroke="currentColor" strokeWidth="1.5" />
       <path d="M6 11h12" stroke="currentColor" strokeWidth="1.5" />
       <path d="M8 11V8.5A4 4 0 0 1 16 8.5V11" stroke="currentColor" strokeWidth="1.5" />
-    </svg>
-  );
-}
-
-function DailyIcon() {
-  return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path
-        d="M12 3l1.8 4.2L18 9l-4.2 1.8L12 15l-1.8-4.2L6 9l4.2-1.8L12 3Z"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinejoin="round"
-      />
-      <path d="M5 19h14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M8 16h8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
     </svg>
   );
 }
@@ -294,19 +276,6 @@ export default function FeatureGridClient() {
       linkKey: "pasta.link",
     },
     {
-      id: "daily",
-      type: "dual",
-      image: "/images/Suggestion_Grille3.png",
-      imageAltKey: "daily.imageAlt",
-      icon: <DailyIcon />,
-      titleKey: "daily.title",
-      textKey: "daily.text",
-      textFullKey: "daily.textFull",
-      linkKey: "daily.link",
-      learnMoreKey: "daily.learnMore",
-      internalLink: SUGGESTIONS_PAGE_PATH,
-    },
-    {
       id: "terrace",
       type: "expand",
       image: "/images/Terrasse_Grille3.jpg",
@@ -354,7 +323,7 @@ export default function FeatureGridClient() {
 
             <div className="relative z-10 w-full max-w-2xl overflow-hidden rounded-2xl bg-white shadow-[0_24px_80px_rgba(0,0,0,0.35)]">
               {expandedCard.image ? (
-                <div className="relative aspect-[16/10]">
+                <div className="relative aspect-[4/3] bg-cream sm:aspect-[16/10]">
                   <Image
                     src={expandedCard.image}
                     alt={t(expandedCard.imageAltKey)}
@@ -371,15 +340,7 @@ export default function FeatureGridClient() {
                 <p className="mt-4 text-base leading-relaxed text-muted">
                   {t(expandedCard.textFullKey ?? expandedCard.textKey)}
                 </p>
-                {expandedCard.internalLink && expandedCard.linkKey ? (
-                  <Link
-                    href={expandedCard.internalLink}
-                    className="mt-6 inline-flex items-center justify-center gap-2 rounded-xl bg-gold px-6 py-3.5 text-sm font-medium text-white shadow-[0_4px_16px_rgba(196,154,42,0.3)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#d4aa35] hover:shadow-[0_8px_24px_rgba(196,154,42,0.45)] sm:text-base"
-                  >
-                    {t(expandedCard.linkKey)}
-                    <span aria-hidden="true">→</span>
-                  </Link>
-                ) : expandedCard.href && expandedCard.linkKey ? (
+                {expandedCard.href && expandedCard.linkKey ? (
                   <a
                     href={expandedCard.href}
                     target="_blank"
@@ -441,8 +402,8 @@ export default function FeatureGridClient() {
                 <>
                   {card.image ? (
                     <div
-                      className={`relative aspect-[21/9] overflow-hidden sm:aspect-[2/1] ${
-                        card.type === "gallery" ? "bg-cream" : ""
+                      className={`relative aspect-[4/3] overflow-hidden sm:aspect-[3/2] ${
+                        card.type === "gallery" ? "bg-cream" : "bg-ink/5"
                       }`}
                     >
                       <Image
@@ -452,7 +413,7 @@ export default function FeatureGridClient() {
                         className={
                           card.type === "gallery"
                             ? "object-contain p-1"
-                            : "object-cover transition-transform duration-500 group-hover:scale-105"
+                            : "object-cover object-center transition-transform duration-500 group-hover:scale-105"
                         }
                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       />
@@ -478,7 +439,7 @@ export default function FeatureGridClient() {
                       {t(card.textKey)}
                     </p>
 
-                    {card.linkKey && card.type !== "dual" ? (
+                    {card.linkKey ? (
                       <span className="mt-1.5 inline-flex items-center gap-1 text-[11px] font-medium text-gold sm:mt-2 sm:text-xs">
                         {t(card.linkKey)}
                         <span className="text-gold" aria-hidden="true">
@@ -517,44 +478,6 @@ export default function FeatureGridClient() {
                   >
                     {content}
                   </button>
-                );
-              }
-
-              if (card.type === "dual") {
-                return (
-                  <div key={card.id} className={cardClassName}>
-                    {content}
-                    <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 px-3 pb-3 sm:px-3.5 sm:pb-3.5">
-                      {card.linkKey && card.internalLink ? (
-                        <Link
-                          href={card.internalLink}
-                          className="inline-flex items-center gap-1 text-[11px] font-medium text-gold transition-opacity hover:opacity-80 sm:text-xs"
-                        >
-                          {t(card.linkKey)}
-                          <span aria-hidden="true">→</span>
-                        </Link>
-                      ) : card.linkKey && card.href ? (
-                        <a
-                          href={card.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 text-[11px] font-medium text-gold transition-opacity hover:opacity-80 sm:text-xs"
-                        >
-                          {t(card.linkKey)}
-                          <span aria-hidden="true">→</span>
-                        </a>
-                      ) : null}
-                      {card.learnMoreKey ? (
-                        <button
-                          type="button"
-                          onClick={() => setExpandedId(card.id)}
-                          className="inline-flex cursor-pointer items-center gap-1 text-[11px] font-medium text-muted transition-colors hover:text-ink sm:text-xs"
-                        >
-                          {t(card.learnMoreKey)}
-                        </button>
-                      ) : null}
-                    </div>
-                  </div>
                 );
               }
 

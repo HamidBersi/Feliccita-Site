@@ -99,6 +99,18 @@
     "subtitle": "Choose online booking or call us directly — we look forward to welcoming you.",
     "back": "Back to home"
   },
+  "ConditionsPage": {
+    "metaTitle": "Booking terms — La Félicità",
+    "metaDescription": "Read the terms and conditions and privacy policy for online booking at La Félicità.",
+    "eyebrow": "Legal information",
+    "title": "Booking terms",
+    "intro": "The documents below outline the terms that apply to online table reservations.",
+    "summary": "By booking a table, you accept the general terms of use and acknowledge the reservation service privacy policy.",
+    "cguLink": "Terms and conditions (PDF)",
+    "privacyLink": "Privacy policy (PDF)",
+    "bloctel": "Under Articles L.223-1 et seq. of the French Consumer Code, you may opt out of telemarketing at any time by registering free of charge at www.bloctel.gouv.fr.",
+    "back": "Back to booking"
+  },
   "SuggestionsPage": {
     "metaTitle": "Today's suggestions — La Félicità",
     "metaDescription": "Discover today's specials and chef's suggestions at La Félicità in Furdenheim.",

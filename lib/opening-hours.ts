@@ -1,6 +1,5 @@
 import { unstable_cache } from "next/cache";
 
-const EATBU_URL = "https://felicita-furdenheim.eatbu.com/?lang=fr";
 const PARIS_TZ = "Europe/Paris";
 
 export type TimeSlot = {
@@ -8,7 +7,7 @@ export type TimeSlot = {
   closes: string;
 };
 
-/** 0 = Sunday … 6 = Saturday (JavaScript convention). */
+/** 0 = Sunday … 6 = Saturday (JavaScript / Google Places convention). */
 export type WeeklySchedule = Record<number, TimeSlot[]>;
 
 export type OpeningStatus = {
@@ -17,20 +16,21 @@ export type OpeningStatus = {
   subtitle: string;
 };
 
+/** Fallback aligné sur la fiche Google si l'API est indisponible. */
 const FALLBACK_SCHEDULE: WeeklySchedule = {
-  0: [],
-  1: [],
+  0: [{ opens: "18:45", closes: "21:30" }],
+  1: [{ opens: "11:45", closes: "13:45" }],
   2: [
-    { opens: "11:30", closes: "13:30" },
-    { opens: "18:30", closes: "21:30" },
+    { opens: "11:45", closes: "13:45" },
+    { opens: "18:45", closes: "21:30" },
   ],
   3: [
-    { opens: "11:30", closes: "13:30" },
-    { opens: "18:30", closes: "21:30" },
+    { opens: "11:45", closes: "13:45" },
+    { opens: "18:45", closes: "21:30" },
   ],
   4: [
-    { opens: "11:30", closes: "13:30" },
-    { opens: "18:30", closes: "21:30" },
+    { opens: "11:45", closes: "13:45" },
+    { opens: "18:45", closes: "21:30" },
   ],
   5: [
     { opens: "11:45", closes: "13:45" },
@@ -39,110 +39,107 @@ const FALLBACK_SCHEDULE: WeeklySchedule = {
   6: [{ opens: "18:45", closes: "21:45" }],
 };
 
-function normalizeSchedule(schedule: WeeklySchedule): WeeklySchedule {
-  return {
-    ...schedule,
-    0: [],
-    6: [{ opens: "18:45", closes: "21:45" }],
-  };
+function emptySchedule(): WeeklySchedule {
+  return { 0: [], 1: [], 2: [], 3: [], 4: [], 5: [], 6: [] };
 }
 
-function parseDayOfWeek(value: string): number | null {
-  const day = value.split("/").pop() ?? value;
-
-  const map: Record<string, number> = {
-    Sunday: 0,
-    Monday: 1,
-    Tuesday: 2,
-    Wednesday: 3,
-    Thursday: 4,
-    Friday: 5,
-    Saturday: 6,
-  };
-
-  return map[day] ?? null;
+function pad2(value: number): string {
+  return String(value).padStart(2, "0");
 }
 
-function isClosedSlot(slot: TimeSlot): boolean {
-  return slot.opens === "00:00" && slot.closes === "00:00";
-}
+type GooglePeriod = {
+  open?: { day?: number; hour?: number; minute?: number };
+  close?: { day?: number; hour?: number; minute?: number };
+};
 
-function parseScheduleFromHtml(html: string): WeeklySchedule | null {
-  const matches = html.matchAll(
-    /<script type="application\/ld\+json">([\s\S]*?)<\/script>/g,
-  );
-
-  for (const match of matches) {
-    try {
-      const data = JSON.parse(match[1]) as {
-        "@type"?: string;
-        openingHoursSpecification?: Array<{
-          dayOfWeek?: string;
-          opens?: string;
-          closes?: string;
-        }>;
-      };
-
-      if (data["@type"] !== "FoodEstablishment" || !data.openingHoursSpecification?.length) {
-        continue;
-      }
-
-      const schedule: WeeklySchedule = {
-        0: [],
-        1: [],
-        2: [],
-        3: [],
-        4: [],
-        5: [],
-        6: [],
-      };
-
-      for (const spec of data.openingHoursSpecification) {
-        const day = spec.dayOfWeek ? parseDayOfWeek(spec.dayOfWeek) : null;
-        const opens = spec.opens;
-        const closes = spec.closes;
-
-        if (day === null || !opens || !closes || isClosedSlot({ opens, closes })) {
-          continue;
-        }
-
-        schedule[day].push({ opens, closes });
-      }
-
-      for (const day of Object.keys(schedule)) {
-        schedule[Number(day)].sort((a, b) => a.opens.localeCompare(b.opens));
-      }
-
-      return schedule;
-    } catch {
-      continue;
-    }
+export function scheduleFromGooglePeriods(periods: GooglePeriod[] | undefined): WeeklySchedule | null {
+  if (!periods?.length) {
+    return null;
   }
 
-  return null;
-}
+  const schedule = emptySchedule();
 
-async function fetchWeeklySchedule(): Promise<WeeklySchedule> {
-  try {
-    const response = await fetch(EATBU_URL, {
-      next: { revalidate: 3600 },
-    });
+  for (const period of periods) {
+    const open = period.open;
+    const close = period.close;
 
-    if (!response.ok) {
-      return normalizeSchedule(FALLBACK_SCHEDULE);
+    if (
+      open?.day === undefined ||
+      open.hour === undefined ||
+      open.minute === undefined ||
+      close?.hour === undefined ||
+      close.minute === undefined
+    ) {
+      continue;
     }
 
-    const html = await response.text();
-    const parsed = parseScheduleFromHtml(html) ?? FALLBACK_SCHEDULE;
-    return normalizeSchedule(parsed);
-  } catch {
-    return normalizeSchedule(FALLBACK_SCHEDULE);
+    // Close day usually matches open day for restaurant meal slots.
+    const day = open.day;
+    if (day < 0 || day > 6) {
+      continue;
+    }
+
+    schedule[day].push({
+      opens: `${pad2(open.hour)}:${pad2(open.minute)}`,
+      closes: `${pad2(close.hour)}:${pad2(close.minute)}`,
+    });
+  }
+
+  for (const day of Object.keys(schedule)) {
+    schedule[Number(day)].sort((a, b) => a.opens.localeCompare(b.opens));
+  }
+
+  const hasAnySlot = Object.values(schedule).some((slots) => slots.length > 0);
+  return hasAnySlot ? schedule : null;
+}
+
+async function fetchWeeklyScheduleFromGoogle(): Promise<WeeklySchedule> {
+  const apiKey = process.env.GOOGLE_PLACES_API_KEY;
+  const placeId = process.env.GOOGLE_PLACE_ID;
+
+  if (!apiKey || !placeId) {
+    return FALLBACK_SCHEDULE;
+  }
+
+  try {
+    const response = await fetch(
+      `https://places.googleapis.com/v1/places/${placeId}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "X-Goog-Api-Key": apiKey,
+          "X-Goog-FieldMask": "regularOpeningHours",
+        },
+        next: { revalidate: 3600 },
+      },
+    );
+
+    if (!response.ok) {
+      const errorBody = await response.text().catch(() => "");
+      console.error(
+        "Google Places hours API error:",
+        response.status,
+        errorBody.slice(0, 400),
+      );
+      return FALLBACK_SCHEDULE;
+    }
+
+    const data = (await response.json()) as {
+      regularOpeningHours?: { periods?: GooglePeriod[] };
+    };
+
+    return (
+      scheduleFromGooglePeriods(data.regularOpeningHours?.periods) ?? FALLBACK_SCHEDULE
+    );
+  } catch (error) {
+    console.error("Google Places hours fetch failed:", error);
+    return FALLBACK_SCHEDULE;
   }
 }
 
 export const getWeeklySchedule = unstable_cache(
-  fetchWeeklySchedule,
-  ["eatbu-opening-hours-v2"],
+  fetchWeeklyScheduleFromGoogle,
+  ["google-opening-hours-v1"],
   { revalidate: 3600 },
 );
 
@@ -160,18 +157,18 @@ function getParisDateParts(date = new Date()) {
   const hour = parts.find((part) => part.type === "hour")?.value ?? "00";
   const minute = parts.find((part) => part.type === "minute")?.value ?? "00";
 
-  const weekdayMap: Record<string, number> = {
-    Sun: 0,
-    Mon: 1,
-    Tue: 2,
-    Wed: 3,
-    Thu: 4,
-    Fri: 5,
-    Sat: 6,
+  const weekdayMap: Record<string, string> = {
+    Sun: "0",
+    Mon: "1",
+    Tue: "2",
+    Wed: "3",
+    Thu: "4",
+    Fri: "5",
+    Sat: "6",
   };
 
   return {
-    day: weekdayMap[weekday] ?? 0,
+    day: Number(weekdayMap[weekday] ?? 0),
     minutes: Number(hour) * 60 + Number(minute),
   };
 }
@@ -192,14 +189,12 @@ function isOpenAt(schedule: WeeklySchedule, date = new Date()): boolean {
 
 function formatTime(time: string, locale: string): string {
   const [hours, minutes] = time.split(":").map(Number);
-  const date = new Date(Date.UTC(2020, 0, 1, hours, minutes));
 
   if (locale === "fr" || locale === "de") {
-    const hh = String(hours).padStart(2, "0");
-    const mm = String(minutes).padStart(2, "0");
-    return `${hh}h${mm}`;
+    return `${pad2(hours)}h${pad2(minutes)}`;
   }
 
+  const date = new Date(Date.UTC(2020, 0, 1, hours, minutes));
   return new Intl.DateTimeFormat(locale, {
     hour: "numeric",
     minute: "2-digit",

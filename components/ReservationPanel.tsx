@@ -3,7 +3,11 @@
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { Link } from "@/i18n/navigation";
-import { getReservationUrl, PHONE_HREF } from "@/lib/constants";
+import { PHONE_HREF } from "@/lib/constants";
+
+function getReservationWidgetSrc(locale: string): string {
+  return `/api/reservation/widget?lang=${locale}`;
+}
 
 type ReservationPanelProps = {
   autoOpenWidget?: boolean;
@@ -70,7 +74,7 @@ export default function ReservationPanel({ autoOpenWidget = false }: Reservation
         <div className="bg-cream/20">
           <iframe
             title={t("iframeTitle")}
-            src={getReservationUrl(locale)}
+            src={getReservationWidgetSrc(locale)}
             className="h-[min(70dvh,560px)] w-full border-0 sm:h-[min(62dvh,600px)]"
             loading="eager"
           />
