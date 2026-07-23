@@ -38,6 +38,14 @@ export const TIKTOK_URL = process.env.TIKTOK_URL ?? "";
 export const SUGGESTIONS_PAGE_PATH = "/suggestions" as const;
 
 /**
+ * Affichage live des suggestions du jour (app Felicita-suggestion).
+ * `from=vitrine` active le bouton retour vers le site.
+ */
+export const SUGGESTIONS_DISPLAY_URL =
+  process.env.NEXT_PUBLIC_SUGGESTIONS_DISPLAY_URL?.trim() ||
+  "https://felicita-suggestion.vercel.app/display?from=vitrine";
+
+/**
  * Image du tableau affiché aux clients.
  * Workflow : modifier librement dans Canva, puis exporter en PNG et remplacer ce fichier.
  */

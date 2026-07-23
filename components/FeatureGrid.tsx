@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useEffect, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
-import { ORDER_URL } from "@/lib/constants";
+import { ORDER_URL, SUGGESTIONS_DISPLAY_URL } from "@/lib/constants";
 import { GALLERY_IMAGES } from "@/lib/gallery-images";
 
 type CardConfig = {
@@ -57,6 +57,20 @@ function TerraceIcon() {
         strokeLinejoin="round"
       />
       <path d="M12 6v14" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+  );
+}
+
+function DailyIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M5 4h14v16H5V4Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+      <path d="M8 8h8M8 12h8M8 16h5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
     </svg>
   );
 }
@@ -274,6 +288,17 @@ export default function FeatureGridClient() {
       textKey: "pasta.text",
       textFullKey: "pasta.textFull",
       linkKey: "pasta.link",
+    },
+    {
+      id: "daily",
+      type: "link",
+      image: "/images/Suggestion_Grille3.png",
+      imageAltKey: "daily.imageAlt",
+      icon: <DailyIcon />,
+      titleKey: "daily.title",
+      textKey: "daily.text",
+      linkKey: "daily.link",
+      href: SUGGESTIONS_DISPLAY_URL,
     },
     {
       id: "terrace",
