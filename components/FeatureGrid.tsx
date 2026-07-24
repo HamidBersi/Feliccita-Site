@@ -11,6 +11,8 @@ type CardConfig = {
   id: string;
   type: "expand" | "link" | "gallery";
   image?: string;
+  /** Vidéo courte muette en boucle (carte média). */
+  video?: string;
   imageAltKey: string;
   icon: ReactNode;
   titleKey: string;
@@ -19,6 +21,62 @@ type CardConfig = {
   linkKey?: string;
   href?: string;
 };
+
+function CardMedia({
+  image,
+  video,
+  alt,
+  className,
+  sizes,
+  galleryBadge,
+}: {
+  image?: string;
+  video?: string;
+  alt: string;
+  className: string;
+  sizes: string;
+  galleryBadge?: ReactNode;
+}) {
+  const [reduceMotion, setReduceMotion] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const sync = () => setReduceMotion(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+
+  const showVideo = Boolean(video) && !reduceMotion;
+
+  return (
+    <>
+      {showVideo ? (
+        <video
+          className={className}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster={image}
+          aria-label={alt}
+        >
+          <source src={video} type="video/mp4" />
+        </video>
+      ) : image ? (
+        <Image
+          src={image}
+          alt={alt}
+          fill
+          className={className}
+          sizes={sizes}
+        />
+      ) : null}
+      {galleryBadge}
+    </>
+  );
+}
 
 function PizzaIcon() {
   return (
@@ -270,7 +328,8 @@ export default function FeatureGridClient() {
     {
       id: "pizza",
       type: "expand",
-      image: "/images/Pizza-Grille1.jpg",
+      image: "/images/Pizza-Grille1-poster.jpg",
+      video: "/videos/pizza-grille.mp4",
       imageAltKey: "pizza.imageAlt",
       icon: <PizzaIcon />,
       titleKey: "pizza.title",
@@ -347,13 +406,13 @@ export default function FeatureGridClient() {
             />
 
             <div className="relative z-10 w-full max-w-2xl overflow-hidden rounded-2xl bg-white shadow-[0_24px_80px_rgba(0,0,0,0.35)]">
-              {expandedCard.image ? (
+              {expandedCard.image || expandedCard.video ? (
                 <div className="relative aspect-[4/3] bg-cream sm:aspect-[16/10]">
-                  <Image
-                    src={expandedCard.image}
+                  <CardMedia
+                    image={expandedCard.image}
+                    video={expandedCard.video}
                     alt={t(expandedCard.imageAltKey)}
-                    fill
-                    className="object-cover"
+                    className="absolute inset-0 h-full w-full object-cover"
                     sizes="(max-width: 768px) 100vw, 672px"
                   />
                 </div>
@@ -425,30 +484,36 @@ export default function FeatureGridClient() {
             {cards.map((card) => {
               const content = (
                 <>
-                  {card.image ? (
+                  {card.image || card.video ? (
                     <div
                       className={`relative aspect-[4/3] overflow-hidden sm:aspect-[3/2] ${
                         card.type === "gallery" ? "bg-cream" : "bg-ink/5"
                       }`}
                     >
-                      <Image
-                        src={card.image}
+                      <CardMedia
+                        image={card.image}
+                        video={card.video}
                         alt={t(card.imageAltKey)}
-                        fill
                         className={
                           card.type === "gallery"
                             ? "object-contain p-1"
-                            : "object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                            : card.video
+                              ? "absolute inset-0 h-full w-full object-cover object-center"
+                              : "object-cover object-center transition-transform duration-500 group-hover:scale-105"
                         }
                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        galleryBadge={
+                          card.type === "gallery" ? (
+                            <div className="absolute inset-0 flex items-center justify-center bg-black/20 transition-colors group-hover:bg-black/30">
+                              <span className="rounded-full bg-white/90 px-2.5 py-1 text-[11px] font-medium text-ink shadow-lg">
+                                {t("gallery.badge", {
+                                  count: GALLERY_IMAGES.length,
+                                })}
+                              </span>
+                            </div>
+                          ) : null
+                        }
                       />
-                      {card.type === "gallery" ? (
-                        <div className="absolute inset-0 flex items-center justify-center bg-black/20 transition-colors group-hover:bg-black/30">
-                          <span className="rounded-full bg-white/90 px-2.5 py-1 text-[11px] font-medium text-ink shadow-lg">
-                            {t("gallery.badge", { count: GALLERY_IMAGES.length })}
-                          </span>
-                        </div>
-                      ) : null}
                     </div>
                   ) : null}
 
