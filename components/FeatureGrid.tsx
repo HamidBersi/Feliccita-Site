@@ -2,10 +2,10 @@
 
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { ORDER_URL, SUGGESTIONS_DISPLAY_URL } from "@/lib/constants";
-import { GALLERY_IMAGES } from "@/lib/gallery-images";
+import { GALLERY_COVER, GALLERY_ITEMS, type GalleryItem } from "@/lib/gallery-images";
 
 type CardConfig = {
   id: string;
@@ -174,6 +174,80 @@ function ChevronRight() {
   );
 }
 
+function PlayIcon() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M8 5.5v13l11-6.5L8 5.5Z" />
+    </svg>
+  );
+}
+
+/** Vidéo galerie : poster + play ; le fichier ne se charge qu’au clic. */
+function GalleryVideoSlide({
+  src,
+  poster,
+  alt,
+  playLabel,
+}: {
+  src: string;
+  poster: string;
+  alt: string;
+  playLabel: string;
+}) {
+  const [started, setStarted] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (!started) return;
+    const el = videoRef.current;
+    if (!el) return;
+    void el.play().catch(() => {
+      /* autoplay peut échouer si l’OS bloque encore — les contrôles restent */
+    });
+  }, [started]);
+
+  if (!started) {
+    return (
+      <div className="relative h-full w-full">
+        <Image
+          src={poster}
+          alt={alt}
+          fill
+          className="object-contain"
+          sizes="100vw"
+          priority
+        />
+        <button
+          type="button"
+          onClick={() => setStarted(true)}
+          className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-black/25 transition-colors hover:bg-black/35"
+          aria-label={playLabel}
+        >
+          <span className="flex h-16 w-16 items-center justify-center rounded-full bg-gold text-white shadow-[0_8px_32px_rgba(0,0,0,0.35)]">
+            <PlayIcon />
+          </span>
+          <span className="rounded-full bg-black/55 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm">
+            {playLabel}
+          </span>
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <video
+      ref={videoRef}
+      className="absolute inset-0 h-full w-full object-contain"
+      src={src}
+      poster={poster}
+      controls
+      playsInline
+      preload="auto"
+      aria-label={alt}
+    />
+  );
+}
+
 function GallerySlider({
   slideIndex,
   onPrev,
@@ -188,6 +262,7 @@ function GallerySlider({
   onClose: () => void;
 }) {
   const t = useTranslations("FeatureGrid");
+  const current = GALLERY_ITEMS[slideIndex] as GalleryItem | undefined;
 
   useEffect(() => {
     function handleKeyDown(event: KeyboardEvent) {
@@ -200,8 +275,6 @@ function GallerySlider({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [onPrev, onNext, onClose]);
 
-  const currentSrc = GALLERY_IMAGES[slideIndex];
-
   return (
     <div
       className="fixed inset-0 z-10 flex flex-col bg-black"
@@ -213,7 +286,10 @@ function GallerySlider({
             {t("gallery.title")}
           </h3>
           <p className="mt-0.5 text-xs text-white/55 sm:text-sm">
-            {t("gallery.counter", { current: slideIndex + 1, total: GALLERY_IMAGES.length })}
+            {t("gallery.counter", {
+              current: slideIndex + 1,
+              total: GALLERY_ITEMS.length,
+            })}
           </p>
         </div>
         <button
@@ -234,20 +310,30 @@ function GallerySlider({
       </div>
 
       <div className="relative min-h-0 flex-1">
-        <Image
-          key={currentSrc}
-          src={currentSrc}
-          alt={t("gallery.photoAlt", { number: slideIndex + 1 })}
-          fill
-          className="object-contain"
-          sizes="100vw"
-          priority
-        />
+        {current?.type === "video" ? (
+          <GalleryVideoSlide
+            key={current.src}
+            src={current.src}
+            poster={current.poster}
+            alt={t("gallery.videoAlt")}
+            playLabel={t("gallery.playVideo")}
+          />
+        ) : current?.type === "image" ? (
+          <Image
+            key={current.src}
+            src={current.src}
+            alt={t("gallery.photoAlt", { number: slideIndex + 1 })}
+            fill
+            className="object-contain"
+            sizes="100vw"
+            priority
+          />
+        ) : null}
 
         <button
           type="button"
           onClick={onPrev}
-          className="absolute left-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-sm transition-colors hover:bg-black/70 sm:left-5 sm:h-12 sm:w-12"
+          className="absolute left-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-sm transition-colors hover:bg-black/70 sm:left-5 sm:h-12 sm:w-12"
           aria-label={t("gallery.prev")}
         >
           <ChevronLeft />
@@ -256,7 +342,7 @@ function GallerySlider({
         <button
           type="button"
           onClick={onNext}
-          className="absolute right-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-sm transition-colors hover:bg-black/70 sm:right-5 sm:h-12 sm:w-12"
+          className="absolute right-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-sm transition-colors hover:bg-black/70 sm:right-5 sm:h-12 sm:w-12"
           aria-label={t("gallery.next")}
         >
           <ChevronRight />
@@ -264,9 +350,9 @@ function GallerySlider({
       </div>
 
       <div className="flex shrink-0 items-center justify-center gap-2 px-4 py-4 supports-[padding:max(0px)]:pb-[max(1rem,env(safe-area-inset-bottom))] sm:py-5">
-        {GALLERY_IMAGES.map((src, index) => (
+        {GALLERY_ITEMS.map((item, index) => (
           <button
-            key={src}
+            key={item.type === "image" ? item.src : `video-${item.src}`}
             type="button"
             onClick={() => onGoTo(index)}
             className={`h-2 rounded-full transition-all ${
@@ -314,13 +400,13 @@ export default function FeatureGridClient() {
 
   function goToPrevSlide() {
     setGallerySlide((current) =>
-      current === 0 ? GALLERY_IMAGES.length - 1 : current - 1,
+      current === 0 ? GALLERY_ITEMS.length - 1 : current - 1,
     );
   }
 
   function goToNextSlide() {
     setGallerySlide((current) =>
-      current === GALLERY_IMAGES.length - 1 ? 0 : current + 1,
+      current === GALLERY_ITEMS.length - 1 ? 0 : current + 1,
     );
   }
 
@@ -383,7 +469,7 @@ export default function FeatureGridClient() {
     {
       id: "gallery",
       type: "gallery",
-      image: GALLERY_IMAGES[0],
+      image: GALLERY_COVER,
       imageAltKey: "gallery.cardImageAlt",
       icon: <GalleryIcon />,
       titleKey: "gallery.title",
@@ -407,7 +493,7 @@ export default function FeatureGridClient() {
 
             <div className="relative z-10 w-full max-w-2xl overflow-hidden rounded-2xl bg-white shadow-[0_24px_80px_rgba(0,0,0,0.35)]">
               {expandedCard.image || expandedCard.video ? (
-                <div className="relative aspect-[4/3] bg-cream sm:aspect-[16/10]">
+                <div className="relative aspect-[4/5] bg-cream sm:aspect-[16/10]">
                   <CardMedia
                     image={expandedCard.image}
                     video={expandedCard.video}
@@ -486,7 +572,7 @@ export default function FeatureGridClient() {
                 <>
                   {card.image || card.video ? (
                     <div
-                      className={`relative aspect-[4/3] overflow-hidden sm:aspect-[3/2] ${
+                      className={`relative aspect-[4/5] overflow-hidden sm:aspect-[3/4] ${
                         card.type === "gallery" ? "bg-cream" : "bg-ink/5"
                       }`}
                     >
@@ -496,10 +582,10 @@ export default function FeatureGridClient() {
                         alt={t(card.imageAltKey)}
                         className={
                           card.type === "gallery"
-                            ? "object-contain p-1"
+                            ? "object-cover object-center"
                             : card.video
                               ? "absolute inset-0 h-full w-full object-cover object-center"
-                              : "object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                              : "object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
                         }
                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         galleryBadge={
@@ -507,7 +593,7 @@ export default function FeatureGridClient() {
                             <div className="absolute inset-0 flex items-center justify-center bg-black/20 transition-colors group-hover:bg-black/30">
                               <span className="rounded-full bg-white/90 px-2.5 py-1 text-[11px] font-medium text-ink shadow-lg">
                                 {t("gallery.badge", {
-                                  count: GALLERY_IMAGES.length,
+                                  count: GALLERY_ITEMS.length,
                                 })}
                               </span>
                             </div>

@@ -22,7 +22,7 @@ function LogoIcon({ alt }: { alt: string }) {
       width={65}
       height={65}
       sizes="65px"
-      className="shrink-0 rounded-full ring-[3px] ring-black"
+      className="shrink-0"
     />
   );
 }

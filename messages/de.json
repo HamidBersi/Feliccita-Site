@@ -200,13 +200,15 @@
       "title": "Das Restaurant entdecken",
       "text": "Durchstöbern Sie unsere Galerie und tauchen Sie ein in die warme Atmosphäre von La Félicità.",
       "link": "Galerie ansehen",
-      "badge": "{count} Fotos",
+      "badge": "{count} Medien",
       "cardImageAlt": "Fotogalerie des Restaurants La Félicità",
       "photoAlt": "Foto {number} vom Restaurant La Félicità",
-      "prev": "Vorheriges Foto",
-      "next": "Nächstes Foto",
+      "videoAlt": "Pizza-Video vom Restaurant La Félicità",
+      "playVideo": "Video abspielen",
+      "prev": "Vorheriges Element",
+      "next": "Nächstes Element",
       "counter": "{current} / {total}",
-      "goTo": "Zu Foto {number} gehen"
+      "goTo": "Zu Element {number} gehen"
     }
   },
   "Contact": {
