@@ -30,7 +30,6 @@ async function proxyRequest(request: Request, context: RouteContext) {
   }
 
   const response = await fetch(targetUrl, init);
-  const body = await response.arrayBuffer();
   const responseHeaders = new Headers();
 
   const responseContentType = response.headers.get("content-type");
@@ -39,6 +38,13 @@ async function proxyRequest(request: Request, context: RouteContext) {
   }
 
   responseHeaders.set("Cache-Control", "no-store");
+
+  // Node.js interdit `new Response(body, { status: 304 })` — renvoyer sans corps.
+  if (response.status === 304) {
+    return new Response(null, { status: 304, headers: responseHeaders });
+  }
+
+  const body = await response.arrayBuffer();
 
   return new Response(body, {
     status: response.status,

@@ -7,6 +7,7 @@ import {
   getParisWeekday,
   type WeeklySchedule,
 } from "@/lib/opening-hours";
+import type { VacationDisplay } from "@/lib/vacation";
 
 const WEEK_DAYS = [1, 2, 3, 4, 5, 6, 0] as const;
 
@@ -20,6 +21,7 @@ type HoursScheduleProps = {
     closed: string;
     closedToday: string;
   };
+  vacation?: VacationDisplay | null;
 };
 
 export default function HoursSchedule({
@@ -28,6 +30,7 @@ export default function HoursSchedule({
   dayLabels,
   closedLabel,
   statusLabels,
+  vacation = null,
 }: HoursScheduleProps) {
   const [today, setToday] = useState(() => getParisWeekday());
   const [status, setStatus] = useState(() => getOpeningStatus(schedule, locale));
@@ -52,38 +55,55 @@ export default function HoursSchedule({
 
   return (
     <div className="space-y-8">
-      <div
-        className={`flex items-center gap-4 rounded-2xl border px-5 py-4 shadow-[0_8px_32px_rgba(0,0,0,0.06)] sm:px-6 sm:py-5 ${
-          status.isOpen
-            ? "border-emerald-200/80 bg-emerald-50/90"
-            : "border-black/8 bg-white/90"
-        }`}
-      >
-        <span
-          className={`relative flex h-3 w-3 shrink-0 rounded-full ${
-            status.isOpen ? "bg-emerald-500" : "bg-muted/50"
-          }`}
-          aria-hidden="true"
-        >
-          {status.isOpen ? (
-            <span className="absolute inset-0 animate-ping rounded-full bg-emerald-400 opacity-60" />
-          ) : null}
-        </span>
-        <div className="min-w-0">
-          <p
-            className={`font-serif text-xl sm:text-2xl ${
-              status.isOpen ? "text-emerald-900" : "text-ink"
-            }`}
-          >
-            {statusTitle}
-          </p>
-          {status.subtitle ? (
-            <p className="mt-1 text-sm text-muted sm:text-base">{status.subtitle}</p>
-          ) : null}
+      {vacation ? (
+        <div className="flex items-start gap-4 rounded-2xl border border-gold/35 bg-gold-bg/90 px-5 py-5 shadow-[0_8px_32px_rgba(196,154,42,0.12)] sm:px-6 sm:py-6">
+          <span
+            className="mt-1.5 flex h-3 w-3 shrink-0 rounded-full bg-gold"
+            aria-hidden="true"
+          />
+          <div className="min-w-0 space-y-3">
+            <p className="font-serif text-xl text-ink sm:text-2xl">{vacation.pageTitle}</p>
+            {vacation.messageLines.map((line) => (
+              <p key={line} className="text-sm leading-relaxed text-ink/80 sm:text-base">
+                {line}
+              </p>
+            ))}
+          </div>
         </div>
-      </div>
+      ) : (
+        <div
+          className={`flex items-center gap-4 rounded-2xl border px-5 py-4 shadow-[0_8px_32px_rgba(0,0,0,0.06)] sm:px-6 sm:py-5 ${
+            status.isOpen
+              ? "border-emerald-200/80 bg-emerald-50/90"
+              : "border-black/8 bg-white/90"
+          }`}
+        >
+          <span
+            className={`relative flex h-3 w-3 shrink-0 rounded-full ${
+              status.isOpen ? "bg-emerald-500" : "bg-muted/50"
+            }`}
+            aria-hidden="true"
+          >
+            {status.isOpen ? (
+              <span className="absolute inset-0 animate-ping rounded-full bg-emerald-400 opacity-60" />
+            ) : null}
+          </span>
+          <div className="min-w-0">
+            <p
+              className={`font-serif text-xl sm:text-2xl ${
+                status.isOpen ? "text-emerald-900" : "text-ink"
+              }`}
+            >
+              {statusTitle}
+            </p>
+            {status.subtitle ? (
+              <p className="mt-1 text-sm text-muted sm:text-base">{status.subtitle}</p>
+            ) : null}
+          </div>
+        </div>
+      )}
 
-      <div className="overflow-hidden rounded-2xl border border-black/8 bg-white shadow-[0_8px_32px_rgba(0,0,0,0.06)]">
+      <div className={`overflow-hidden rounded-2xl border border-black/8 bg-white shadow-[0_8px_32px_rgba(0,0,0,0.06)] ${vacation ? "opacity-60" : ""}`}>
         {WEEK_DAYS.map((day, index) => {
           const slots = schedule[day] ?? [];
           const hours = slots.length

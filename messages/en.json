@@ -57,6 +57,13 @@
       "subtitle": "Order online or by phone"
     }
   },
+  "Vacation": {
+    "shortTitle": "Closed for vacation",
+    "pageTitle": "We are on vacation",
+    "reopening": "Reopening on {date}",
+    "defaultMessage": "We are taking a short summer break.\nThank you for your loyalty — see you soon!\nExpected reopening on {date}.",
+    "modalDismiss": "Got it"
+  },
   "HoursPage": {
     "metaTitle": "Opening Hours — La Félicità",
     "metaDescription": "Check La Félicità opening hours in Furdenheim: lunch, dinner and live open/closed status.",

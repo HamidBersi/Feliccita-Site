@@ -57,6 +57,13 @@
       "subtitle": "Online oder telefonisch bestellen"
     }
   },
+  "Vacation": {
+    "shortTitle": "Urlaubsbedingt geschlossen",
+    "pageTitle": "Wir sind im Urlaub",
+    "reopening": "Wiedereröffnung am {date}",
+    "defaultMessage": "Wir machen eine kurze Sommerpause.\nVielen Dank für Ihre Treue — bis bald!\nWiedereröffnung voraussichtlich am {date}.",
+    "modalDismiss": "Verstanden"
+  },
   "HoursPage": {
     "metaTitle": "Öffnungszeiten — La Félicità",
     "metaDescription": "Öffnungszeiten von La Félicità in Furdenheim: Mittag, Abend und aktueller Geöffnet-Status.",

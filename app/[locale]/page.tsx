@@ -3,7 +3,9 @@ import ContactSection from "@/components/ContactSection";
 import FeatureGridSection from "@/components/FeatureGridSection";
 import Hero from "@/components/Hero";
 import Navbar from "@/components/Navbar";
-import { setRequestLocale } from "next-intl/server";
+import VacationModal from "@/components/VacationModal";
+import { getVacationDisplay } from "@/lib/vacation";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -12,6 +14,14 @@ type Props = {
 export default async function Home({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
+
+  const tVacation = await getTranslations("Vacation");
+  const vacation = getVacationDisplay(locale, {
+    shortTitle: tVacation("shortTitle"),
+    pageTitle: tVacation("pageTitle"),
+    formatReopening: (date) => tVacation("reopening", { date }),
+    formatDefaultMessage: (date) => tVacation("defaultMessage", { date }),
+  });
 
   return (
     <>
@@ -22,6 +32,13 @@ export default async function Home({ params }: Props) {
       <AboutSection />
       <FeatureGridSection />
       <ContactSection />
+      {vacation ? (
+        <VacationModal
+          vacation={vacation}
+          dismissLabel={tVacation("modalDismiss")}
+          storageKey={`felicita-vacation-modal-${process.env.VACATION_UNTIL?.trim() ?? "active"}`}
+        />
+      ) : null}
     </>
   );
 }

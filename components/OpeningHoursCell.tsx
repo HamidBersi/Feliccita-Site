@@ -6,6 +6,7 @@ import {
   type OpeningStatus,
   type WeeklySchedule,
 } from "@/lib/opening-hours";
+import type { VacationDisplay } from "@/lib/vacation";
 
 type OpeningHoursCellProps = {
   schedule: WeeklySchedule;
@@ -15,12 +16,14 @@ type OpeningHoursCellProps = {
     closed: string;
     closedToday: string;
   };
+  vacation?: VacationDisplay | null;
 };
 
 export default function OpeningHoursCell({
   schedule,
   locale,
   labels,
+  vacation = null,
 }: OpeningHoursCellProps) {
   const [status, setStatus] = useState<OpeningStatus>(() =>
     getOpeningStatus(schedule, locale),
@@ -42,6 +45,19 @@ export default function OpeningHoursCell({
       : status.titleKey === "closedToday"
         ? labels.closedToday
         : labels.closed;
+
+  if (vacation) {
+    return (
+      <>
+        <p className="text-[11px] font-semibold leading-tight text-ink transition-colors duration-300 group-hover:text-gold sm:text-[13px] sm:leading-snug">
+          {vacation.shortTitle}
+        </p>
+        <div className="mt-px text-[9px] leading-tight text-muted transition-colors duration-300 group-hover:text-ink/70 sm:mt-0.5 sm:text-[11px] sm:leading-snug">
+          {vacation.shortSubtitle}
+        </div>
+      </>
+    );
+  }
 
   return (
     <>

@@ -8,6 +8,7 @@ import {
   getGooglePlaceData,
 } from "@/lib/google-place";
 import { getWeeklySchedule } from "@/lib/opening-hours";
+import { getVacationDisplay } from "@/lib/vacation";
 import { Link } from "@/i18n/navigation";
 
 function StarIcon() {
@@ -156,9 +157,16 @@ function InfoItem({
 
 export default async function InfoStrip() {
   const t = await getTranslations("InfoStrip");
+  const tVacation = await getTranslations("Vacation");
   const locale = await getLocale();
   const googlePlace = await getGooglePlaceData();
   const schedule = await getWeeklySchedule();
+  const vacation = getVacationDisplay(locale, {
+    shortTitle: tVacation("shortTitle"),
+    pageTitle: tVacation("pageTitle"),
+    formatReopening: (date) => tVacation("reopening", { date }),
+    formatDefaultMessage: (date) => tVacation("defaultMessage", { date }),
+  });
   const ratingLabel = formatGoogleRating(googlePlace.rating, locale);
 
   return (
@@ -196,6 +204,7 @@ export default async function InfoStrip() {
               closed: t("hours.closed"),
               closedToday: t("hours.closedToday"),
             }}
+            vacation={vacation}
           />
         </InfoItem>
         <InfoItem

@@ -52,7 +52,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className={`${playfair.variable} ${inter.variable} h-full`}>
+    <html lang={locale} data-scroll-behavior="smooth" className={`${playfair.variable} ${inter.variable} h-full`}>
       <body className="min-h-svh bg-cream supports-[height:100dvh]:min-h-dvh">
         <NextIntlClientProvider messages={messages}>
           {children}

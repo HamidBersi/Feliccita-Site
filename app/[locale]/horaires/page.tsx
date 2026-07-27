@@ -4,6 +4,7 @@ import HoursSchedule from "@/components/HoursSchedule";
 import Navbar from "@/components/Navbar";
 import { ORDER_URL, PHONE_HREF } from "@/lib/constants";
 import { getWeeklySchedule } from "@/lib/opening-hours";
+import { getVacationDisplay } from "@/lib/vacation";
 import { Link } from "@/i18n/navigation";
 
 type Props = {
@@ -25,7 +26,14 @@ export default async function HoursPage({ params }: Props) {
   setRequestLocale(locale);
 
   const t = await getTranslations("HoursPage");
+  const tVacation = await getTranslations("Vacation");
   const schedule = await getWeeklySchedule();
+  const vacation = getVacationDisplay(locale, {
+    shortTitle: tVacation("shortTitle"),
+    pageTitle: tVacation("pageTitle"),
+    formatReopening: (date) => tVacation("reopening", { date }),
+    formatDefaultMessage: (date) => tVacation("defaultMessage", { date }),
+  });
 
   const dayLabels = {
     0: t("days.sunday"),
@@ -93,6 +101,7 @@ export default async function HoursPage({ params }: Props) {
                 closed: t("statusClosed"),
                 closedToday: t("statusClosedToday"),
               }}
+              vacation={vacation}
             />
 
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
