@@ -56,6 +56,12 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   return (
     <html lang={locale} data-scroll-behavior="smooth" className={`${playfair.variable} ${inter.variable} h-full`}>
+      <head>
+        <meta
+          name="google-site-verification"
+          content="PobuSzbqWvXmm3UuciaDMFrtO3Yv6UFV8bTRsAg4BZU"
+        />
+      </head>
       <body className="min-h-svh bg-cream supports-[height:100dvh]:min-h-dvh">
         <NextIntlClientProvider messages={messages}>
           {children}
