@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import { hasLocale } from "next-intl";
 import { routing } from "@/i18n/routing";
 import Footer from "@/components/Footer";
+import FooterGate from "@/components/FooterGate";
 import "../globals.css";
 
 const playfair = Playfair_Display({
@@ -65,7 +66,9 @@ export default async function LocaleLayout({ children, params }: Props) {
       <body className="min-h-svh bg-cream supports-[height:100dvh]:min-h-dvh">
         <NextIntlClientProvider messages={messages}>
           {children}
-          <Footer />
+          <FooterGate>
+            <Footer />
+          </FooterGate>
         </NextIntlClientProvider>
       </body>
     </html>

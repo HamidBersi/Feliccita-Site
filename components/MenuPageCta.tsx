@@ -18,8 +18,8 @@ export default function MenuPageCta() {
   }
 
   return createPortal(
-    <div className="fixed inset-x-0 bottom-0 z-[90] border-t border-border/60 bg-white/92 shadow-[0_-10px_40px_rgba(0,0,0,0.12)] backdrop-blur-lg supports-[padding:max(0px)]:pb-[max(0.75rem,env(safe-area-inset-bottom))]">
-      <div className="px-4 py-3 sm:px-6">
+    <div className="fixed inset-x-0 bottom-0 z-[90] border-t border-border/60 bg-white/92 shadow-[0_-10px_40px_rgba(0,0,0,0.12)] backdrop-blur-lg supports-[padding:max(0px)]:pb-[max(0.5rem,env(safe-area-inset-bottom))]">
+      <div className="px-5 py-2 sm:px-8">
         <HeroCtaButtons order={t("order")} reserve={t("reserve")} variant="floating" />
       </div>
     </div>,

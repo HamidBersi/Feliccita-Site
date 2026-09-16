@@ -57,7 +57,7 @@ export default function StickyHeroCta({ order, reserve }: StickyHeroCtaProps) {
       aria-hidden={!isFloating}
     >
       <div
-        className={`border-t border-border/60 bg-white/92 px-4 py-3 shadow-[0_-10px_40px_rgba(0,0,0,0.12)] backdrop-blur-lg transition-[transform,box-shadow] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] supports-[padding:max(0px)]:pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:px-6 ${
+        className={`border-t border-border/60 bg-white/92 px-5 py-2 shadow-[0_-10px_40px_rgba(0,0,0,0.12)] backdrop-blur-lg transition-[transform,box-shadow] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] supports-[padding:max(0px)]:pb-[max(0.5rem,env(safe-area-inset-bottom))] sm:px-8 ${
           isFloating ? "scale-100" : "scale-[0.98]"
         }`}
       >
