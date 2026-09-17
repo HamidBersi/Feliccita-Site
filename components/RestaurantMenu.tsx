@@ -51,12 +51,13 @@ function WineRow({ item, locale }: { item: MenuItem; locale: string }) {
     <article className="min-w-0">
       <div className="flex min-w-0 items-baseline gap-2">
         <h3 className="min-w-0 text-[15.5px] font-semibold break-words text-ink">
+          {item.name}
           {item.emoji ? (
             <>
-              <DishMark emoji={item.emoji} />{" "}
+              {" "}
+              <DishMark emoji={item.emoji} />
             </>
           ) : null}
-          {item.name}
         </h3>
         <span
           className="mb-1 min-w-[1.25rem] flex-1 border-b border-dotted border-black/15"
@@ -95,14 +96,15 @@ function DishRow({ item, locale }: { item: MenuItem; locale: string }) {
     <article className="min-w-0">
       <div className="flex min-w-0 items-baseline gap-2">
         <h3 className="min-w-0 text-[15.5px] font-semibold break-words text-ink">
-          {item.emoji ? (
-            <>
-              <DishMark emoji={item.emoji} />{" "}
-            </>
-          ) : null}
           {title}
           {volume ? (
             <span className="ml-1.5 font-normal text-muted">{volume}</span>
+          ) : null}
+          {item.emoji ? (
+            <>
+              {" "}
+              <DishMark emoji={item.emoji} />
+            </>
           ) : null}
         </h3>
         <span
