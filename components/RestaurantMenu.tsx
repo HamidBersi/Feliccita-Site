@@ -48,11 +48,15 @@ function WineRow({ item, locale }: { item: MenuItem; locale: string }) {
   const headline = item.priceVerre ?? item.priceBouteille;
 
   return (
-    <article>
-      <div className="flex items-baseline gap-2">
-        <h3 className="inline-flex shrink-0 items-center gap-[0.22em] text-[15.5px] font-semibold text-ink">
-          {item.emoji ? <DishMark emoji={item.emoji} /> : null}
-          <span>{item.name}</span>
+    <article className="min-w-0">
+      <div className="flex min-w-0 items-baseline gap-2">
+        <h3 className="min-w-0 text-[15.5px] font-semibold break-words text-ink">
+          {item.emoji ? (
+            <>
+              <DishMark emoji={item.emoji} />{" "}
+            </>
+          ) : null}
+          {item.name}
         </h3>
         <span
           className="mb-1 min-w-[1.25rem] flex-1 border-b border-dotted border-black/15"
@@ -88,16 +92,18 @@ function DishRow({ item, locale }: { item: MenuItem; locale: string }) {
   const { title, volume } = splitNameAndVolume(item.name);
 
   return (
-    <article>
-      <div className="flex items-baseline gap-2">
-        <h3 className="inline-flex shrink-0 items-center gap-[0.22em] text-[15.5px] font-semibold text-ink">
-          {item.emoji ? <DishMark emoji={item.emoji} /> : null}
-          <span>
-            {title}
-            {volume ? (
-              <span className="ml-1.5 font-normal text-muted">{volume}</span>
-            ) : null}
-          </span>
+    <article className="min-w-0">
+      <div className="flex min-w-0 items-baseline gap-2">
+        <h3 className="min-w-0 text-[15.5px] font-semibold break-words text-ink">
+          {item.emoji ? (
+            <>
+              <DishMark emoji={item.emoji} />{" "}
+            </>
+          ) : null}
+          {title}
+          {volume ? (
+            <span className="ml-1.5 font-normal text-muted">{volume}</span>
+          ) : null}
         </h3>
         <span
           className="mb-1 min-w-[1.25rem] flex-1 border-b border-dotted border-black/15"
@@ -198,7 +204,7 @@ export default function RestaurantMenu({
   }
 
   return (
-    <div className="pb-[calc(4.25rem+env(safe-area-inset-bottom,0px))]">
+    <div className="min-w-0 overflow-x-hidden pb-[calc(4.25rem+env(safe-area-inset-bottom,0px))]">
       <div className="sticky top-[68px] z-30 border-b border-black/8 bg-cream/95 py-3 backdrop-blur-sm">
         <div className="mx-auto max-w-2xl px-5 sm:px-8">
           <HScrollRow className="gap-1.5 pr-10 md:pr-0" fadeFromClass="from-cream">
@@ -262,9 +268,11 @@ export default function RestaurantMenu({
         <div className="space-y-10 pt-6 sm:space-y-12 sm:pt-8">
           {visibleSections.map(({ category, family, items }) => (
             <section key={category.id}>
-              <div className="mb-4 flex items-baseline justify-between gap-3">
-                <h2 className="font-serif text-2xl text-ink sm:text-3xl">{category.label}</h2>
-                <span className="text-[13px] text-muted">
+              <div className="mb-4 flex min-w-0 items-baseline justify-between gap-3">
+                <h2 className="min-w-0 flex-1 font-serif text-2xl break-words text-ink sm:text-3xl">
+                  {category.label}
+                </h2>
+                <span className="shrink-0 text-[13px] text-muted">
                   {items.length} {family.countNoun}
                 </span>
               </div>

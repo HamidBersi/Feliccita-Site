@@ -25,10 +25,10 @@ export default async function MenuPage({ params }: Props) {
   const menu = await getMenu();
 
   return (
-    <div className="relative min-h-svh supports-[height:100dvh]:min-h-dvh">
+    <div className="relative min-h-svh bg-cream supports-[height:100dvh]:min-h-dvh">
       <Navbar />
 
-      <main className="bg-cream pb-24 sm:pb-28">
+      <main className="min-h-[calc(100svh-68px)] bg-cream pb-24 sm:pb-28">
         <RestaurantMenu
           menuItems={menu.items}
           categories={menu.categories}

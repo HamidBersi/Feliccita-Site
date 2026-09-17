@@ -96,13 +96,14 @@ export default function Navbar() {
   }
 
   const isHome = pathname === "/";
+  const isMenu = pathname === "/menu";
 
   return (
     <>
       <header
-        className={`z-[100] flex h-[68px] shrink-0 items-center justify-between gap-4 border-b border-border bg-white px-5 md:px-8 lg:px-10 ${
-          isHome ? "absolute inset-x-0 top-0" : "sticky top-0"
-        }`}
+        className={`z-[100] flex h-[68px] shrink-0 items-center justify-between gap-4 border-b border-border px-5 md:px-8 lg:px-10 ${
+          isMenu ? "bg-cream" : "bg-white"
+        } ${isHome ? "absolute inset-x-0 top-0" : "sticky top-0"}`}
       >
         <Link href="/" className="flex min-w-0 shrink-0 items-center gap-2.5" onClick={closeDrawer}>
           <LogoIcon alt={t("logoAlt")} />
