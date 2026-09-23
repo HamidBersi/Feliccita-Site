@@ -206,14 +206,14 @@ export default function RestaurantMenu({
   }
 
   return (
-    <div className="min-w-0 overflow-x-hidden pb-[calc(4.25rem+env(safe-area-inset-bottom,0px))]">
-      <div className="sticky top-[68px] z-30 border-b border-black/8 bg-cream/95 py-3 backdrop-blur-sm">
+    <div className="min-w-0 pb-[calc(4.25rem+env(safe-area-inset-bottom,0px))]">
+      <div className="sticky top-[68px] z-30 border-b border-black/8 bg-cream pt-2 pb-2">
         <div className="mx-auto max-w-2xl px-5 sm:px-8">
-          <HScrollRow className="gap-1.5 pr-10 md:pr-0" fadeFromClass="from-cream">
+          <HScrollRow className="gap-2 pr-10 md:pr-0" fadeFromClass="from-cream">
             <button
               type="button"
               onClick={() => selectFamily("all")}
-              className={`inline-flex shrink-0 rounded-full border px-2.5 py-1 text-xs font-medium ${
+              className={`inline-flex shrink-0 rounded-full border px-3.5 py-1.5 text-sm font-medium ${
                 familyId === "all"
                   ? "border-ink bg-ink text-white"
                   : "border-black/10 bg-white text-ink"
@@ -227,7 +227,7 @@ export default function RestaurantMenu({
                 type="button"
                 title={family.label}
                 onClick={() => selectFamily(family.id)}
-                className={`inline-flex shrink-0 rounded-full border px-2.5 py-1 text-xs font-medium ${
+                className={`inline-flex shrink-0 rounded-full border px-3.5 py-1.5 text-sm font-medium ${
                   familyId === family.id
                     ? "border-ink bg-ink text-white"
                     : "border-black/10 bg-white text-ink"
@@ -239,8 +239,8 @@ export default function RestaurantMenu({
           </HScrollRow>
 
           {activeFamily ? (
-            <div className="mt-3 border-t border-black/8 pt-2.5">
-              <HScrollRow className="gap-x-1 pr-10 md:pr-0" fadeFromClass="from-cream">
+            <div className="mt-2 border-t border-black/8 pt-1.5">
+              <HScrollRow className="gap-x-1.5 pr-10 md:pr-0" fadeFromClass="from-cream">
                 {activeFamily.categoryNames
                   .filter((name) => categories.some((category) => category.label === name))
                   .map((name) => {
@@ -250,10 +250,10 @@ export default function RestaurantMenu({
                         key={name}
                         type="button"
                         onClick={() => setSubCategoryName(name)}
-                        className={`shrink-0 border-b-2 px-2.5 py-1 text-[13px] ${
+                        className={`shrink-0 border-b-2 px-3 py-1.5 text-[15px] ${
                           selected
-                            ? "border-ink font-semibold text-ink"
-                            : "border-transparent text-muted hover:text-ink"
+                            ? "border-gold font-semibold text-gold"
+                            : "border-transparent text-muted hover:text-gold"
                         }`}
                       >
                         {chipLabel(activeFamily, name)}
@@ -266,12 +266,12 @@ export default function RestaurantMenu({
         </div>
       </div>
 
-      <div className="relative z-10 mx-auto min-w-0 max-w-2xl px-5 sm:px-8">
-        <div className="space-y-10 pt-6 sm:space-y-12 sm:pt-8">
+      <div className="relative z-10 mx-auto min-w-0 max-w-2xl overflow-x-hidden px-5 sm:px-8">
+        <div className="space-y-10 pt-4 sm:space-y-12 sm:pt-5">
           {visibleSections.map(({ category, family, items }) => (
             <section key={category.id}>
               <div className="mb-4 flex min-w-0 items-baseline justify-between gap-3">
-                <h2 className="min-w-0 flex-1 font-serif text-2xl break-words text-ink sm:text-3xl">
+                <h2 className="min-w-0 flex-1 font-serif text-2xl break-words text-gold sm:text-3xl">
                   {category.label}
                 </h2>
                 <span className="shrink-0 text-[13px] text-muted">

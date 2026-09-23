@@ -49,10 +49,10 @@ const reserveHeroClassName =
   "group inline-flex cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-md bg-white px-4 py-2 text-[13px] font-semibold tracking-wide text-ink shadow-[0_6px_18px_rgba(0,0,0,0.18)] transition-all duration-200 ease-out hover:-translate-y-0.5 hover:bg-gold-bg hover:shadow-[0_8px_22px_rgba(0,0,0,0.22)] active:translate-y-0 sm:px-5 sm:text-sm [&_svg]:transition-transform [&_svg]:duration-200 group-hover:[&_svg]:scale-110";
 
 const orderFloatingClassName =
-  "group inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-md bg-gold px-3.5 py-2 text-[13px] font-semibold tracking-wide text-white shadow-[0_4px_14px_rgba(196,154,42,0.4)] transition-all duration-200 ease-out hover:bg-[#d4aa35] hover:shadow-[0_6px_18px_rgba(196,154,42,0.5)] active:translate-y-0 sm:px-5 [&_svg]:transition-transform [&_svg]:duration-200 group-hover:[&_svg]:scale-110";
+  "group inline-flex min-w-0 flex-1 items-center justify-center rounded-md bg-gold px-2 py-2.5 text-center text-[12px] font-semibold leading-tight tracking-wide text-white shadow-[0_4px_14px_rgba(196,154,42,0.4)] transition-all duration-200 ease-out hover:bg-[#d4aa35] hover:shadow-[0_6px_18px_rgba(196,154,42,0.5)] active:translate-y-0 sm:px-5 sm:text-[13px]";
 
 const reserveFloatingClassName =
-  "group inline-flex cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-md bg-ink px-3.5 py-2 text-[13px] font-semibold tracking-wide text-white shadow-[0_4px_14px_rgba(0,0,0,0.2)] transition-all duration-200 ease-out hover:bg-dark active:translate-y-0 sm:px-5 [&_svg]:transition-transform [&_svg]:duration-200 group-hover:[&_svg]:scale-110";
+  "group inline-flex min-w-0 flex-1 cursor-pointer items-center justify-center rounded-md bg-ink px-2 py-2.5 text-center text-[12px] font-semibold leading-tight tracking-wide text-white shadow-[0_4px_14px_rgba(0,0,0,0.2)] transition-all duration-200 ease-out hover:bg-dark active:translate-y-0 sm:px-5 sm:text-[13px]";
 
 type HeroCtaButtonsProps = {
   order: string;
@@ -72,15 +72,15 @@ export default function HeroCtaButtons({ order, reserve, variant }: HeroCtaButto
         rel="noopener noreferrer"
         className={isHero ? orderHeroClassName : orderFloatingClassName}
       >
-        <CartIcon size={iconSize} />
-        {order}
+        {isHero ? <CartIcon size={iconSize} /> : null}
+        <span className="truncate">{order}</span>
       </a>
 
       <ReservationButton
         className={isHero ? reserveHeroClassName : reserveFloatingClassName}
       >
-        <CalendarIcon size={iconSize} />
-        {reserve}
+        {isHero ? <CalendarIcon size={iconSize} /> : null}
+        <span className="truncate">{reserve}</span>
       </ReservationButton>
     </>
   );
@@ -94,7 +94,7 @@ export default function HeroCtaButtons({ order, reserve, variant }: HeroCtaButto
   }
 
   return (
-    <div className="flex w-full flex-wrap items-center justify-center gap-2">
+    <div className="mx-auto flex w-full max-w-lg items-stretch gap-2">
       {buttons}
     </div>
   );
