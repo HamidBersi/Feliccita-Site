@@ -20,6 +20,12 @@ import { isMenuLocale } from "@/lib/menu-i18n/locale";
 import MenuPageCta from "@/components/MenuPageCta";
 import { HScrollRow } from "@/components/HScrollRow";
 import { DishMark } from "@/components/DishMark";
+import {
+  SuggestionsFishCard,
+  fishDescriptionWithoutBoardHint,
+  isFishCategory,
+  isFishOfTheDay,
+} from "@/components/SuggestionsMenuCta";
 
 type RestaurantMenuProps = {
   menuItems: MenuItem[];
@@ -122,6 +128,9 @@ function DishRow({
 
   const translated = translateItem(menuLocale, item.name, item.description);
   const { title, volume } = splitNameAndVolume(translated.name);
+  const description = isFishOfTheDay(item.name)
+    ? fishDescriptionWithoutBoardHint(translated.description)
+    : translated.description;
 
   return (
     <article className="min-w-0">
@@ -146,9 +155,9 @@ function DishRow({
           {formatMenuPrice(item.price, locale)}
         </span>
       </div>
-      {translated.description ? (
+      {description ? (
         <p className="mt-0.5 max-w-[92%] text-[13px] leading-snug text-muted">
-          {translated.description}
+          {description}
         </p>
       ) : null}
     </article>
@@ -328,6 +337,11 @@ export default function RestaurantMenu({
                   />
                 ))}
               </div>
+              {isFishCategory(category.label) ? (
+                <div className="mt-14 sm:mt-16">
+                  <SuggestionsFishCard locale={menuLocale} />
+                </div>
+              ) : null}
             </section>
           ))}
         </div>
