@@ -5,10 +5,18 @@ import { useTranslations } from "next-intl";
 import { formatMenuPrice, type MenuCategory, type MenuItem } from "@/lib/menu";
 import {
   MENU_FAMILIES,
-  chipLabel,
   type MenuFamily,
   type MenuFamilyId,
 } from "@/lib/menu-groups";
+import {
+  tFamily,
+  tUi,
+  translateCategoryChip,
+  translateCategoryName,
+  translateItem,
+  type MenuLocale,
+} from "@/lib/menu-i18n";
+import { isMenuLocale } from "@/lib/menu-i18n/locale";
 import MenuPageCta from "@/components/MenuPageCta";
 import { HScrollRow } from "@/components/HScrollRow";
 import { DishMark } from "@/components/DishMark";
@@ -18,6 +26,10 @@ type RestaurantMenuProps = {
   categories: MenuCategory[];
   locale: string;
 };
+
+function toMenuLocale(locale: string): MenuLocale {
+  return isMenuLocale(locale) ? locale : "fr";
+}
 
 function splitNameAndVolume(name: string): { title: string; volume: string | null } {
   const match = name.match(/^(.*?)\s+(\d+(?:[.,]\d+)?\s*cl)\s*$/i);
@@ -35,13 +47,23 @@ function formatTier(value: string, locale: string): string {
   return formatMenuPrice(Number.parseFloat(value.replace(",", ".")), locale);
 }
 
-function WineRow({ item, locale }: { item: MenuItem; locale: string }) {
+function WineRow({
+  item,
+  locale,
+  menuLocale,
+}: {
+  item: MenuItem;
+  locale: string;
+  menuLocale: MenuLocale;
+}) {
+  const ui = tUi(menuLocale);
+  const translated = translateItem(menuLocale, item.name, item.description);
   const formats = [
-    { key: "quart", label: "Quart", value: item.priceQuart },
-    { key: "demi", label: "Demi", value: item.priceDemi },
+    { key: "quart", label: ui.wineQuart, value: item.priceQuart },
+    { key: "demi", label: ui.wineDemi, value: item.priceDemi },
     {
       key: "bouteille",
-      label: "Bouteille",
+      label: ui.wineBottle,
       value: item.priceVerre ? item.priceBouteille : null,
     },
   ].filter((tier) => Boolean(tier.value));
@@ -51,7 +73,7 @@ function WineRow({ item, locale }: { item: MenuItem; locale: string }) {
     <article className="min-w-0">
       <div className="flex min-w-0 items-baseline gap-2">
         <h3 className="min-w-0 text-[15.5px] font-semibold break-words text-ink">
-          {item.name}
+          {translated.name}
           {item.emoji ? (
             <>
               {" "}
@@ -76,21 +98,30 @@ function WineRow({ item, locale }: { item: MenuItem; locale: string }) {
           ))}
         </p>
       ) : null}
-      {item.description ? (
+      {translated.description ? (
         <p className="mt-1 max-w-[92%] text-[13px] leading-snug text-muted">
-          {item.description}
+          {translated.description}
         </p>
       ) : null}
     </article>
   );
 }
 
-function DishRow({ item, locale }: { item: MenuItem; locale: string }) {
+function DishRow({
+  item,
+  locale,
+  menuLocale,
+}: {
+  item: MenuItem;
+  locale: string;
+  menuLocale: MenuLocale;
+}) {
   if (hasWineTiers(item)) {
-    return <WineRow item={item} locale={locale} />;
+    return <WineRow item={item} locale={locale} menuLocale={menuLocale} />;
   }
 
-  const { title, volume } = splitNameAndVolume(item.name);
+  const translated = translateItem(menuLocale, item.name, item.description);
+  const { title, volume } = splitNameAndVolume(translated.name);
 
   return (
     <article className="min-w-0">
@@ -115,9 +146,9 @@ function DishRow({ item, locale }: { item: MenuItem; locale: string }) {
           {formatMenuPrice(item.price, locale)}
         </span>
       </div>
-      {item.description ? (
+      {translated.description ? (
         <p className="mt-0.5 max-w-[92%] text-[13px] leading-snug text-muted">
-          {item.description}
+          {translated.description}
         </p>
       ) : null}
     </article>
@@ -130,6 +161,8 @@ export default function RestaurantMenu({
   locale,
 }: RestaurantMenuProps) {
   const t = useTranslations("MenuPage");
+  const menuLocale = toMenuLocale(locale);
+  const ui = tUi(menuLocale);
   const [familyId, setFamilyId] = useState<MenuFamilyId>("all");
   const [subCategoryName, setSubCategoryName] = useState<string | null>(null);
 
@@ -177,15 +210,15 @@ export default function RestaurantMenu({
         family: {
           id: "piatti" as const,
           label: "",
-          categoryNames: [],
-          countNoun: "plats",
+          categoryNames: [] as string[],
+          countNoun: tFamily(menuLocale, "piatti").countNoun,
         },
         items: itemsByCategoryId.get(category.id) ?? [],
       }))
       .filter((section) => section.items.length > 0);
 
     return [...grouped, ...leftovers];
-  }, [activeFamily, categories, itemsByCategoryId, subCategoryName]);
+  }, [activeFamily, categories, itemsByCategoryId, menuLocale, subCategoryName]);
 
   function firstSubCategoryName(family: MenuFamily): string | null {
     return (
@@ -205,10 +238,14 @@ export default function RestaurantMenu({
     setSubCategoryName(family ? firstSubCategoryName(family) : null);
   }
 
+  function countNounFor(family: MenuFamily): string {
+    return tFamily(menuLocale, family.id).countNoun;
+  }
+
   return (
-    <div className="min-w-0 pb-[calc(4.25rem+env(safe-area-inset-bottom,0px))]">
-      <div className="sticky top-[68px] z-30 border-b border-black/8 bg-cream pt-2 pb-2">
-        <div className="mx-auto max-w-2xl px-5 sm:px-8">
+    <div className="min-w-0 max-w-full pb-[calc(4.25rem+env(safe-area-inset-bottom,0px))]">
+      <div className="sticky top-[68px] z-30 min-w-0 border-b border-black/8 bg-cream pt-2 pb-2">
+        <div className="mx-auto min-w-0 max-w-2xl px-5 sm:px-8">
           <HScrollRow className="gap-2 pr-10 md:pr-0" fadeFromClass="from-cream">
             <button
               type="button"
@@ -219,23 +256,26 @@ export default function RestaurantMenu({
                   : "border-black/10 bg-white text-ink"
               }`}
             >
-              {t("filterAll")}
+              {ui.filterAll}
             </button>
-            {MENU_FAMILIES.map((family) => (
-              <button
-                key={family.id}
-                type="button"
-                title={family.label}
-                onClick={() => selectFamily(family.id)}
-                className={`inline-flex shrink-0 rounded-full border px-3.5 py-1.5 text-sm font-medium ${
-                  familyId === family.id
-                    ? "border-ink bg-ink text-white"
-                    : "border-black/10 bg-white text-ink"
-                }`}
-              >
-                {family.navLabel ?? family.label}
-              </button>
-            ))}
+            {MENU_FAMILIES.map((family) => {
+              const labels = tFamily(menuLocale, family.id);
+              return (
+                <button
+                  key={family.id}
+                  type="button"
+                  title={labels.label}
+                  onClick={() => selectFamily(family.id)}
+                  className={`inline-flex shrink-0 rounded-full border px-3.5 py-1.5 text-sm font-medium ${
+                    familyId === family.id
+                      ? "border-ink bg-ink text-white"
+                      : "border-black/10 bg-white text-ink"
+                  }`}
+                >
+                  {labels.navLabel ?? labels.label}
+                </button>
+              );
+            })}
           </HScrollRow>
 
           {activeFamily ? (
@@ -256,7 +296,7 @@ export default function RestaurantMenu({
                             : "border-transparent text-muted hover:text-gold"
                         }`}
                       >
-                        {chipLabel(activeFamily, name)}
+                        {translateCategoryChip(name, menuLocale)}
                       </button>
                     );
                   })}
@@ -272,15 +312,20 @@ export default function RestaurantMenu({
             <section key={category.id}>
               <div className="mb-4 flex min-w-0 items-baseline justify-between gap-3">
                 <h2 className="min-w-0 flex-1 font-serif text-2xl break-words text-gold sm:text-3xl">
-                  {category.label}
+                  {translateCategoryName(category.label, menuLocale)}
                 </h2>
                 <span className="shrink-0 text-[13px] text-muted">
-                  {items.length} {family.countNoun}
+                  {items.length} {countNounFor(family)}
                 </span>
               </div>
               <div className="space-y-5">
                 {items.map((item) => (
-                  <DishRow key={item.id} item={item} locale={locale} />
+                  <DishRow
+                    key={item.id}
+                    item={item}
+                    locale={locale}
+                    menuLocale={menuLocale}
+                  />
                 ))}
               </div>
             </section>
